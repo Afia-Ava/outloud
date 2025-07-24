@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>outloud – Explore</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .explore-main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 0 80px 0;
+      }
+      .spotlight-carousel {
+        display: flex;
+        gap: 18px;
+        margin-bottom: 32px;
+      }
+
+      .spotlight-card {
+        background: var(--card, #23272f);
+        border-radius: 16px;
+        padding: 18px 22px;
+        min-width: 220px;
+        color: var(--text, #f5f6fa);
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      }
+      .explore-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 28px;
+      }
+      .chip {
+        background: #23272f;
+        color: #fff;
+        border: none;
+        border-radius: 16px;
+        padding: 7px 18px;
+        font-size: 1rem;
+        cursor: pointer;
+        opacity: 0.85;
+        transition: background 0.2s;
+      }
+      .chip.active,
+      .chip:hover {
+        background: #111;
+        color: #fff;
+        opacity: 1;
+      }
+      .feed-list {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .post-preview {
+        background: var(--card, #23272f);
+        border-radius: 16px;
+        padding: 20px 22px;
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .post-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #18191a;
+        flex-shrink: 0;
+      }
+      .post-content {
+        flex: 1;
+      }
+      .post-meta {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: #bbb;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .post-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 2px;
+      }
+      .post-tags {
+        display: flex;
+        gap: 7px;
+        margin-bottom: 6px;
+      }
+      .tag {
+        background: #18191a;
+        color: #fff;
+        border-radius: 12px;
+        padding: 2px 10px;
+        font-size: 0.92rem;
+        opacity: 0.8;
+      }
+      .post-actions {
+        display: flex;
+        gap: 18px;
+        margin-top: 8px;
+        color: #bbb;
+        font-size: 1.05rem;
+      }
+      .suggestions {
+        background: #23272f;
+        border-radius: 14px;
+        padding: 16px 18px;
+        margin-top: 18px;
+        color: #eee;
+        font-size: 1rem;
+      }
+      .sticky-cta {
+        position: fixed;
+        bottom: 24px;
+        right: 32px;
+        background: #111;
+        color: #fff;
+        border-radius: 24px;
+        padding: 14px 28px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.18);
+        border: none;
+        cursor: pointer;
+        z-index: 100;
+      }
+      @media (max-width: 700px) {
+        .explore-main {
+          padding: 18px 0 80px 0;
+        }
+        .spotlight-carousel {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .sticky-cta {
+          right: 10px;
+          left: 10px;
+          width: calc(100vw - 20px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="logo">outloud</div>
+      <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="#" class="active">Explore</a></li>
+          <li><a href="#">Feed</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="explore-main">
+      <!-- Spotlight Section -->
+      <div class="spotlight-carousel">
+        <div class="spotlight-card">
+          🔖 <b>Post of the Day</b><br />“Shipped my first SaaS MVP!”
+        </div>
+        <div class="spotlight-card">
+          💭 <b>Most Reflective</b><br />“What I learned from failing my first
+          launch.”
+        </div>
+        <div class="spotlight-card">
+          🎉 <b>First-time Poster!</b><br />@sam_dev just joined!
+        </div>
+      </div>
+      <!-- Filters/Chips -->
+      <div class="explore-filters">
+        <button class="chip active">Newest</button>
+        <button class="chip">Most Loved</button>
+        <button class="chip">Most Commented</button>
+        <button class="chip">Streak Maintained</button>
+        <button class="chip">#AI</button>
+        <button class="chip">#WebApp</button>
+        <button class="chip">#Wellness</button>
+        <button class="chip">#Bootstrapping</button>
+        <button class="chip">Building</button>
+        <button class="chip">Learning</button>
+        <button class="chip">Reflecting</button>
+        <button class="chip">Overwhelmed</button>
+        <button class="chip">Launch</button>
+        <button class="chip">Traction</button>
+        <button class="chip">Figuring it out</button>
+        <button class="chip">🔥 Popular This Week</button>
+      </div>
+      <!-- Main Feed -->
+      <div class="feed-list">
+        <div class="post-preview">
+          <div class="post-avatar"></div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-user">@ava</span>
+              <span>·</span>
+              <span>2h ago</span>
+            </div>
+            <div class="post-title">
+              🚀 Shipped MVP for my climate tech project!
+            </div>
+            <div class="post-tags">
+              <span class="tag">#WebApp</span>
+              <span class="tag">early-stage</span>
+            </div>
+            <div class="post-body">
+              Hit all my goals, but ran into some API rate limits. Next up:
+              onboarding flow.
+            </div>
+            <div class="post-actions">
+              <span>❤️ 12</span>
+              <span>🔁 3</span>
+              <span>💬 2</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-preview">
+          <div class="post-avatar"></div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-user">@jules</span>
+              <span>·</span>
+              <span>5h ago</span>
+            </div>
+            <div class="post-title">🧠 Debugging payment flow</div>
+            <div class="post-tags">
+              <span class="tag">#SaaS</span>
+              <span class="tag">debugging</span>
+            </div>
+            <div class="post-body">
+              Stripe webhooks are a pain! But I finally got it working.
+              Launching soon 🚀
+            </div>
+            <div class="post-actions">
+              <span>❤️ 7</span>
+              <span>🔁 1</span>
+              <span>💬 0</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-preview">
+          <div class="post-avatar"></div>
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="post-user">@sam_dev</span>
+              <span>·</span>
+              <span>1d ago</span>
+            </div>
+            <div class="post-title">
+              💭 Reflecting on my first week building in public
+            </div>
+            <div class="post-tags">
+              <span class="tag">reflecting</span>
+              <span class="tag">#AI</span>
+            </div>
+            <div class="post-body">
+              It’s scary to share, but I’m glad I started. Thanks for the
+              support!
+            </div>
+            <div class="post-actions">
+              <span>❤️ 15</span>
+              <span>🔁 2</span>
+              <span>💬 4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Smart Suggestions -->
+      <div class="suggestions">
+        <b>Liked this?</b> Here are more logs from
+        <span style="color: #fff">@ava</span>.<br />
+        Other builders posting about <span style="color: #fff">#AI</span> this
+        week.
+      </div>
+    </main>
+    <button class="sticky-cta">
+      + Post &nbsp; What are you working on right now?
+    </button>
+    <script src="script.js"></script>
+  </body>
+</html>

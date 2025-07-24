@@ -1,4 +1,3 @@
-/* outloud landing page inspired by X/Twitter and Threads */
 :root {
   --bg: #18191a;
   --sidebar: #222327;
@@ -39,7 +38,7 @@ body {
 .sidebar nav ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 60px 0; /* increased margin to push button up */
+  margin: 0 0 60px 0;
 }
 .sidebar nav ul li {
   margin-bottom: 18px;
