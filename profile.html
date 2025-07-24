@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>outloud – Profile</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background: #18191a;
+        color: #f5f6fa;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+      .sidebar {
+        width: 220px;
+        min-height: 100vh;
+        background: #23272f;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 32px;
+        z-index: 10;
+      }
+      .profile-main {
+        max-width: 900px;
+        margin-left: 320px;
+        padding: 48px 0 80px 0;
+      }
+      .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin-bottom: 18px;
+        border-bottom: 1px solid #222;
+        padding-bottom: 18px;
+      }
+      .profile-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #23272f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+        border: 2px solid #222;
+      }
+      .profile-info {
+        flex: 1;
+      }
+      .profile-name {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 2px;
+        color: #fff;
+      }
+      .profile-bio {
+        color: #aaa;
+        font-size: 1rem;
+        margin-bottom: 8px;
+      }
+      .profile-badges {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      .badge {
+        background: #222;
+        color: #7ecfff;
+        border-radius: 10px;
+        padding: 2px 10px;
+        font-size: 0.92rem;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+      .profile-stats {
+        display: flex;
+        gap: 32px;
+        margin-bottom: 24px;
+        color: #bbb;
+        font-size: 0.98rem;
+        border-bottom: 1px solid #222;
+        padding-bottom: 18px;
+      }
+      .profile-links {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .profile-links a {
+        color: #7ecfff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        opacity: 0.85;
+        transition: opacity 0.2s;
+      }
+      .profile-links a:hover {
+        opacity: 1;
+      }
+      .profile-content {
+        margin-top: 18px;
+      }
+      .pinned-post {
+        background: #23272f;
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+        border-left: 3px solid #7ecfff;
+      }
+      .streaks {
+        background: #23272f;
+        border-radius: 10px;
+        padding: 10px 16px;
+        margin-bottom: 16px;
+        color: #7ecfff;
+        font-size: 0.98rem;
+      }
+      .user-posts {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .user-post {
+        background: #23272f;
+        border-radius: 10px;
+        padding: 14px 16px;
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.06);
+        border: 1px solid #222;
+      }
+      .user-post-title {
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-bottom: 4px;
+        color: #fff;
+      }
+      .user-post-meta {
+        color: #aaa;
+        font-size: 0.93rem;
+        margin-bottom: 6px;
+      }
+      .user-post-body {
+        font-size: 0.98rem;
+        color: #f5f6fa;
+      }
+      .filter-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .filter-btn {
+        background: #222;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 5px 14px;
+        font-size: 0.98rem;
+        cursor: pointer;
+        opacity: 0.85;
+        transition: background 0.2s;
+      }
+      .filter-btn.active,
+      .filter-btn:hover {
+        background: #111;
+        color: #7ecfff;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="logo">outloud</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="explore.html">Explore</a></li>
+          <li><a href="feed.html">Feed</a></li>
+          <li><a href="profile.html" class="active">Profile</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="profile-main">
+      <!-- Header Section -->
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7ecfff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="8" r="4" />
+            <path d="M6 20v-2a6 6 0 0 1 12 0v2" />
+          </svg>
+        </div>
+        <div class="profile-info">
+          <div class="profile-name">Sam Dev</div>
+          <div class="profile-bio">
+            Building SaaS tools for creators. Currently working on EcoTrack 🌱
+          </div>
+          <div class="profile-badges">
+            <span class="badge"
+              ><svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ecfff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon
+                  points="12 2 15 8.5 22 9.3 17 14.1 18.5 21 12 17.8 5.5 21 7 14.1 2 9.3 9 8.5 12 2"
+                />
+              </svg>
+              Early User</span
+            >
+            <span class="badge"
+              ><svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ecfff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M13 2v8h8" />
+                <path d="M13 12a8 8 0 1 1-8-8" />
+              </svg>
+              14-day Streak</span
+            >
+            <span class="badge"
+              ><svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ecfff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="8" r="7" />
+                <polyline points="8 21 12 17 16 21" />
+              </svg>
+              Top Liked Post</span
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Stats -->
+      <div class="profile-stats">
+        <span>Posts: <b>24</b></span>
+        <span>Following: <b>18</b></span>
+        <span>Posting since <b>Feb 2024</b></span>
+      </div>
+      <!-- Links -->
+      <div class="profile-links">
+        <a href="#" title="Website"
+          ><svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7ecfff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path
+              d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+            /></svg
+        ></a>
+        <a href="#" title="GitHub"
+          ><svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7ecfff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+            /></svg
+        ></a>
+        <a href="#" title="Twitter"
+          ><svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7ecfff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9.09 9.09 0 0 1-2.88 1.1A4.52 4.52 0 0 0 16.11 0c-2.5 0-4.52 2.02-4.52 4.52 0 .35.04.7.11 1.03A12.94 12.94 0 0 1 3.1.67a4.52 4.52 0 0 0-.61 2.28c0 1.57.8 2.96 2.02 3.77A4.48 4.48 0 0 1 2.2 6.1v.06c0 2.2 1.56 4.03 3.64 4.45a4.52 4.52 0 0 1-2.04.08c.58 1.81 2.26 3.13 4.25 3.16A9.05 9.05 0 0 1 0 19.54a12.8 12.8 0 0 0 6.94 2.03c8.33 0 12.89-6.9 12.89-12.89 0-.2 0-.39-.01-.58A9.22 9.22 0 0 0 24 4.59a9.05 9.05 0 0 1-2.6.71z"
+            /></svg
+        ></a>
+        <a href="#" title="LinkedIn"
+          ><svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#7ecfff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+            />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" /></svg
+        ></a>
+      </div>
+      <!-- Main Content Area -->
+      <div class="profile-content">
+        <!-- Pinned Post -->
+        <div class="pinned-post">
+          <b>Pinned:</b> Why I build out loud — Sharing my journey helps me stay
+          accountable and connect with other makers.
+        </div>
+        <!-- Streaks/Milestones -->
+        <div class="streaks">
+          Wrote for 14 days in a row · Logged every week this month
+        </div>
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <button class="filter-btn active">Highlights</button>
+          <button class="filter-btn">All</button>
+          <button class="filter-btn">Drafts</button>
+        </div>
+        <!-- User Posts -->
+        <div class="user-posts">
+          <div class="user-post">
+            <div class="user-post-title">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ecfff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="vertical-align: middle; margin-right: 6px"
+              >
+                <path d="M2 16.5V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2.5" />
+                <path d="M17 9l-5 5-5-5" />
+                <path d="M12 4v10" />
+              </svg>
+              Launched EcoTrack MVP
+            </div>
+            <div class="user-post-meta">Jul 20, 2025 · 21 likes</div>
+            <div class="user-post-body">
+              Shared my first SaaS MVP for climate tracking. Excited for
+              feedback!
+            </div>
+          </div>
+          <div class="user-post">
+            <div class="user-post-title">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ecfff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="vertical-align: middle; margin-right: 6px"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"
+                />
+              </svg>
+              Reflecting on my first week building in public
+            </div>
+            <div class="user-post-meta">Jul 13, 2025 · 15 likes</div>
+            <div class="user-post-body">
+              It’s scary to share, but I’m glad I started. Thanks for the
+              support!
+            </div>
+          </div>
+          <div class="user-post">
+            <div class="user-post-title">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#7ecfff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="vertical-align: middle; margin-right: 6px"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+              </svg>
+              Debugging payment flow
+            </div>
+            <div class="user-post-meta">Jul 6, 2025 · 7 likes</div>
+            <div class="user-post-body">
+              Stripe webhooks are a pain! But I finally got it working.
+              Launching soon 🚀
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
