@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>outloud – Feed</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .sidebar {
+        width: 220px;
+        min-height: 100vh;
+        background: #23272f;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 32px;
+        z-index: 10;
+      }
+      .feed-main {
+        max-width: 1200px;
+        margin-left: 300px;
+        padding: 40px 0 80px 0;
+        text-align: left;
+        align-items: flex-start;
+      }
+      .feed-header {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+      .feed-list {
+        display: grid;
+        grid-template-columns: repeat(3, 320px);
+        gap: 32px 28px;
+        margin-bottom: 32px;
+        justify-items: start;
+      }
+      .newsletter-box {
+        background: #23272f;
+        border-radius: 14px;
+        padding: 28px 24px 24px 24px;
+        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
+        color: #f5f6fa;
+        font-size: 1.13rem;
+        line-height: 1.7;
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .suggested-posts {
+        background: #23272f;
+        border-radius: 14px;
+        padding: 16px 18px;
+        margin-top: 18px;
+        color: #eee;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="logo">outloud</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="explore.html">Explore</a></li>
+          <li><a href="#" class="active">Feed</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="feed-main">
+      <div class="feed-header">Your Feed</div>
+      <div class="feed-list">
+        <div class="newsletter-box">
+          <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px">
+            🚀 Weekly update from <span style="color: #7ecfff">@ava</span>
+          </div>
+          <div style="color: #bbb; font-size: 0.98rem; margin-bottom: 12px">
+            1h ago · Following
+          </div>
+          <div style="margin-bottom: 14px">
+            Super excited to share what I’ve built this week. Thanks for the
+            support!
+          </div>
+          <div style="color: #aaa; font-size: 0.97rem">
+            ❤️ 8 &nbsp; 🔁 2 &nbsp; 💬 1
+          </div>
+        </div>
+        <div class="newsletter-box">
+          <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px">
+            🧠 Debugging payment flow by
+            <span style="color: #7ecfff">@jules</span>
+          </div>
+          <div style="color: #bbb; font-size: 0.98rem; margin-bottom: 12px">
+            3h ago · Liked
+          </div>
+          <div style="margin-bottom: 14px">
+            Stripe webhooks are a pain! But I finally got it working. Launching
+            soon 🚀
+          </div>
+          <div style="color: #aaa; font-size: 0.97rem">
+            ❤️ 7 &nbsp; 🔁 1 &nbsp; 💬 0
+          </div>
+        </div>
+        <div class="newsletter-box">
+          <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px">
+            💭 Reflections from <span style="color: #7ecfff">@sam_dev</span>
+          </div>
+          <div style="color: #bbb; font-size: 0.98rem; margin-bottom: 12px">
+            1d ago · Saved
+          </div>
+          <div style="margin-bottom: 14px">
+            It’s scary to share, but I’m glad I started. Thanks for the support!
+          </div>
+          <div style="color: #aaa; font-size: 0.97rem">
+            ❤️ 15 &nbsp; 🔁 2 &nbsp; 💬 4
+          </div>
+        </div>
+      </div>
+      <div class="suggested-posts">
+        <b>Suggested for you</b><br />
+        <span>@jules</span> posted about <span>#AI</span> this week.<br />
+        <span>@ava</span> shared a new project in <span>#WebApp</span>.
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
