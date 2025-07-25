@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>outloud – Progress Log</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background: #18191a;
+        color: #f5f6fa;
+        font-family: 'Inter', Arial, sans-serif;
+        margin: 0;
+      }
+      .sidebar {
+        width: 220px;
+        min-height: 100vh;
+        background: #23272f;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 32px;
+        z-index: 10;
+      }
+      .progress-main {
+        max-width: 900px;
+        margin-left: 320px;
+        padding: 40px 0 80px 0;
+      }
+      .progress-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 28px;
+      }
+      .progress-title {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+      .add-task-form {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .add-task-input {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 8px;
+        border: none;
+        font-size: 1rem;
+        background: #23272f;
+        color: #fff;
+      }
+      .add-task-btn {
+        background: #111;
+        color: #fff;
+        border-radius: 8px;
+        border: none;
+        padding: 10px 22px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .search-bar {
+        margin-bottom: 18px;
+        display: flex;
+        gap: 10px;
+      }
+      .search-input {
+        flex: 1;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: none;
+        font-size: 1rem;
+        background: #23272f;
+        color: #fff;
+      }
+      .task-group {
+        margin-bottom: 32px;
+      }
+      .task-date {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #bbb;
+      }
+      .task-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .task-item {
+        background: #23272f;
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .task-text {
+        flex: 1;
+      }
+      .streak-summary {
+        background: #23272f;
+        border-radius: 12px;
+        padding: 18px 22px;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .streak-icon {
+        font-size: 2rem;
+      }
+      .weekly-summary {
+        background: #23272f;
+        border-radius: 12px;
+        padding: 18px 22px;
+        margin-bottom: 24px;
+      }
+      @media (max-width: 700px) {
+        .progress-main {
+          margin-left: 0;
+          padding: 18px 0 80px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="logo">
+        <a href="index.html" style="color: inherit; text-decoration: none"
+          >outloud</a
+        >
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="explore.html">Explore</a></li>
+          <li><a href="feed.html">Feed</a></li>
+          <li><a href="#" class="active">Progress</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="progress-main">
+      <div class="progress-header">
+        <span class="progress-title">Daily Task Log</span>
+      </div>
+      <div style="display: flex; gap: 40px; align-items: flex-start">
+        <div style="flex: 2; min-width: 0">
+          <form class="add-task-form" id="addTaskForm">
+            <input
+              type="text"
+              class="add-task-input"
+              id="taskInput"
+              placeholder="What did you accomplish today?"
+              required
+            />
+            <button type="submit" class="add-task-btn">➕ Add Task</button>
+          </form>
+          <div class="search-bar">
+            <input
+              type="text"
+              class="search-input"
+              id="searchInput"
+              placeholder="Search tasks or keywords..."
+            />
+          </div>
+          <div id="taskGroups"></div>
+        </div>
+        <div
+          style="
+            width: 320px;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+          "
+        >
+          <div
+            class="streak-summary"
+            id="streakSummary"
+            style="
+              display: none;
+              background: #23272f;
+              border-radius: 12px;
+              padding: 18px 22px;
+            "
+          >
+            <span class="streak-icon">🔥</span>
+            <span id="streakText">Streak: 0 days</span>
+          </div>
+          <div
+            class="weekly-summary"
+            id="weeklySummary"
+            style="
+              display: none;
+              background: #23272f;
+              border-radius: 12px;
+              padding: 18px 22px;
+            "
+          >
+            <b>Weekly Summary</b>
+            <div id="weeklyText">No summary yet.</div>
+          </div>
+          <div
+            style="background: #23272f; border-radius: 14px; padding: 18px 18px"
+          >
+            <div
+              style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px"
+            >
+              Calendar
+            </div>
+            <input
+              type="date"
+              id="calendarDate"
+              style="
+                width: 100%;
+                padding: 8px;
+                border-radius: 8px;
+                border: none;
+                background: #18191a;
+                color: #fff;
+                margin-bottom: 14px;
+              "
+            />
+            <div id="calendarTasks"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const addTaskForm = document.getElementById('addTaskForm');
+      const taskInput = document.getElementById('taskInput');
+      const searchInput = document.getElementById('searchInput');
+      const taskGroups = document.getElementById('taskGroups');
+      const streakSummary = document.getElementById('streakSummary');
+      const streakText = document.getElementById('streakText');
+      const weeklySummary = document.getElementById('weeklySummary');
+      const weeklyText = document.getElementById('weeklyText');
+      const calendarDate = document.getElementById('calendarDate');
+      const calendarTasks = document.getElementById('calendarTasks');
+
+      function getToday() {
+        const d = new Date();
+        return d.toISOString().slice(0, 10);
+      }
+
+      function getWeekStart() {
+        const d = new Date();
+        d.setDate(d.getDate() - d.getDay());
+        return d.toISOString().slice(0, 10);
+      }
+
+      function loadTasks() {
+        const tasks = JSON.parse(localStorage.getItem('progressTasks') || '[]');
+        return tasks;
+      }
+
+      function saveTasks(tasks) {
+        localStorage.setItem('progressTasks', JSON.stringify(tasks));
+      }
+
+      function groupTasksByDate(tasks) {
+        const groups = {};
+        tasks.forEach(task => {
+          if (!groups[task.date]) groups[task.date] = [];
+          groups[task.date].push(task);
+        });
+        return groups;
+      }
+
+      function renderTasks(filter = '') {
+        const tasks = loadTasks();
+        let filtered = tasks;
+        if (filter) {
+          filtered = tasks.filter(t =>
+            t.text.toLowerCase().includes(filter.toLowerCase())
+          );
+        }
+        const groups = groupTasksByDate(filtered);
+        taskGroups.innerHTML = '';
+        Object.keys(groups)
+          .sort((a, b) => b.localeCompare(a))
+          .forEach(date => {
+            const group = document.createElement('div');
+            group.className = 'task-group';
+            const dateLabel = document.createElement('div');
+            dateLabel.className = 'task-date';
+            dateLabel.textContent = date;
+            group.appendChild(dateLabel);
+            const ul = document.createElement('ul');
+            ul.className = 'task-list';
+            groups[date].forEach(task => {
+              const li = document.createElement('li');
+              li.className = 'task-item';
+              const span = document.createElement('span');
+              span.className = 'task-text';
+              span.textContent = task.text;
+              li.appendChild(span);
+              ul.appendChild(li);
+            });
+            group.appendChild(ul);
+            taskGroups.appendChild(group);
+          });
+      }
+
+      addTaskForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const text = taskInput.value.trim();
+        if (!text) return;
+        const tasks = loadTasks();
+        tasks.push({ text, date: getToday() });
+        saveTasks(tasks);
+        taskInput.value = '';
+        renderTasks(searchInput.value);
+        updateStreak();
+        updateWeeklySummary();
+        renderCalendarTasks();
+      });
+
+      searchInput.addEventListener('input', e => {
+        renderTasks(searchInput.value);
+      });
+
+      function updateStreak() {
+        const tasks = loadTasks();
+        const dates = [...new Set(tasks.map(t => t.date))].sort((a, b) =>
+          b.localeCompare(a)
+        );
+        let streak = 0;
+        let today = getToday();
+        for (let i = 0; i < dates.length; i++) {
+          const d = new Date(today);
+          d.setDate(d.getDate() - i);
+          if (dates[i] === d.toISOString().slice(0, 10)) {
+            streak++;
+          } else {
+            break;
+          }
+        }
+        if (streak > 0) {
+          streakSummary.style.display = '';
+          streakText.textContent = `Streak: ${streak} day${
+            streak > 1 ? 's' : ''
+          }`;
+        } else {
+          streakSummary.style.display = 'none';
+        }
+      }
+
+      function updateWeeklySummary() {
+        const tasks = loadTasks();
+        const weekStart = getWeekStart();
+        const weekTasks = tasks.filter(t => t.date >= weekStart);
+        if (weekTasks.length > 0) {
+          weeklySummary.style.display = '';
+          weeklyText.textContent = `Tasks this week: ${weekTasks.length}`;
+        } else {
+          weeklySummary.style.display = 'none';
+        }
+      }
+
+      // Calendar logic
+      function renderCalendarTasks() {
+        const selectedDate = calendarDate.value || getToday();
+        const tasks = loadTasks().filter(t => t.date === selectedDate);
+        calendarTasks.innerHTML = '';
+        if (tasks.length === 0) {
+          calendarTasks.innerHTML =
+            '<div style="color:#bbb;">No tasks for this date.</div>';
+        } else {
+          const ul = document.createElement('ul');
+          ul.className = 'task-list';
+          tasks.forEach(task => {
+            const li = document.createElement('li');
+            li.className = 'task-item';
+            const span = document.createElement('span');
+            span.className = 'task-text';
+            span.textContent = task.text;
+            li.appendChild(span);
+            ul.appendChild(li);
+          });
+          calendarTasks.appendChild(ul);
+        }
+      }
+
+      calendarDate.value = getToday();
+      calendarDate.addEventListener('change', renderCalendarTasks);
+
+      // calendarTaskForm submit removed
+
+      // Initial render
+      renderTasks();
+      updateStreak();
+      updateWeeklySummary();
+      renderCalendarTasks();
+    </script>
+  </body>
+</html>

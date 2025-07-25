@@ -6,9 +6,24 @@
     <title>outloud – Explore</title>
     <link rel="stylesheet" href="style.css" />
     <style>
+      .sidebar {
+        width: 220px;
+        min-height: 100vh;
+        background: #23272f;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 32px;
+        z-index: 10;
+      }
+    </style>
+    <style>
       .explore-main {
         max-width: 900px;
-        margin: 0 auto;
+        margin-left: 320px;
         padding: 40px 0 80px 0;
       }
       .spotlight-carousel {
@@ -146,18 +161,22 @@
   </head>
   <body>
     <aside class="sidebar">
-      <div class="logo">outloud</div>
+      <div class="logo">
+        <a href="index.html" style="color: inherit; text-decoration: none"
+          >outloud</a
+        >
+      </div>
       <nav>
         <ul>
-          <li><a href="home.html">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="#" class="active">Explore</a></li>
           <li><a href="feed.html">Feed</a></li>
+          <li><a href="progress.html">Progress</a></li>
           <li><a href="profile.html">Profile</a></li>
         </ul>
       </nav>
     </aside>
     <main class="explore-main">
-      <!-- Spotlight Section -->
       <div class="spotlight-carousel">
         <div class="spotlight-card">
           🔖 <b>Post of the Day</b><br />“Shipped my first SaaS MVP!”
@@ -170,7 +189,6 @@
           🎉 <b>First-time Poster!</b><br />@sam_dev just joined!
         </div>
       </div>
-      <!-- Filters/Chips -->
       <div class="explore-filters">
         <button class="chip active">Newest</button>
         <button class="chip">Most Loved</button>
