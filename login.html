@@ -254,9 +254,13 @@
         });
         signupForm.addEventListener('submit', function(e) {
           e.preventDefault();
+          const name = signupForm.querySelector('input[type="text"]').value;
           const email = signupForm.querySelector('input[type="email"]').value;
           const password = signupForm.querySelector('input[type="password"]').value;
           signup(email, password)
+            .then((userCredential) => {
+              return userCredential.user.updateProfile({ displayName: name }).then(() => userCredential);
+            })
             .then(() => {
               alert('Sign up successful!');
               window.location.href = 'index.html';
