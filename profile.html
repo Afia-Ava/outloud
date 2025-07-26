@@ -398,7 +398,6 @@
           loadProfileCover();
 
           function loadProfileFields() {
-            // Name: from firebase displayName, or userName in localStorage
             var name = '';
             if (window.firebase && firebase.auth && firebase.auth().currentUser && firebase.auth().currentUser.displayName) {
               name = firebase.auth().currentUser.displayName;
@@ -406,21 +405,14 @@
               name = localStorage.getItem('userName') || '';
             }
             document.getElementById('profileName').textContent = name;
-
-            // Username
             var username = localStorage.getItem('userUsername') || '';
             document.getElementById('profileUsername').textContent = username ? '@' + username : '';
-
-            // Bio
             var bio = localStorage.getItem('userBio') || '';
             document.getElementById('profileBio').textContent = bio;
-
-            // Location
             var location = localStorage.getItem('userLocation') || '';
             document.getElementById('profileLocation').textContent = location;
           }
 
-          // If using firebase, wait for auth state, else just load
           if (window.firebase && firebase.auth) {
             firebase.auth().onAuthStateChanged(function (user) {
               loadProfileFields();
@@ -979,17 +971,8 @@ saveBtn.innerHTML = `<svg class="save-icon" width="20" height="20" viewBox="0 0 
         }
         if (window.firebase && firebase.auth) {
           firebase.auth().onAuthStateChanged(function (user) {
-            if (user && user.displayName) {
-              setSidebarName(user.displayName);
-            } else if (user && user.email) {
-              setSidebarName(user.email.split('@')[0]);
-            } else {
-              var localName =
-                localStorage.getItem('userName') ||
-                document.getElementById('profileName').textContent ||
-                'User';
-              setSidebarName(localName);
-            }
+            var localName = localStorage.getItem('userName') || 'User';
+            setSidebarName(localName);
           });
         } else {
           var localName =

@@ -1,6 +1,3 @@
-// Loads user name and profile picture from localStorage (set in settings.js) and updates the sidebar user bar on explore.html
-// Falls back to default avatar and 'User' if not set
-
 document.addEventListener('DOMContentLoaded', function () {
   const name = localStorage.getItem('userName') || 'User';
   const pfp = localStorage.getItem('profilePic') || '';
