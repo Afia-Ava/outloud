@@ -1,45 +1,3 @@
-<button
-  id="addNewsletterBtn"
-  style="
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: #014848;
-    color: #fff;
-    border: none;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 200;
-    cursor: pointer;
-    font-size: 2rem;
-  "
->
-  <svg
-    width="28"
-    height="28"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="white"
-    stroke-width="2.5"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <line x1="12" y1="5" x2="12" y2="19" />
-    <line x1="5" y1="12" x2="19" y2="12" />
-  </svg>
-</button>
-<script>
-  document
-    .getElementById('addNewsletterBtn')
-    .addEventListener('click', function () {
-      alert('Add newsletter functionality coming soon!');
-    });
-</script>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,6 +10,61 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="firebase-config.js"></script>
     <script src="auth.js"></script>
+    <style>
+      .user-posts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 18px;
+        justify-items: center;
+      }
+      .user-post {
+        background: transparent;
+        border: 1.5px solid #23272f;
+        border-radius: 8px;
+        box-shadow: none;
+        padding: 0 0 16px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        height: 180px;
+      }
+      .user-post img {
+        width: 100%;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 0;
+        display: block;
+      }
+      .user-post-caption {
+        color: #fff;
+        font-size: 0.98rem;
+        font-weight: 700;
+        margin: 14px 18px 2px 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 18px);
+        box-sizing: border-box;
+      }
+      .user-post-firstline {
+        color: #b5b5c2;
+        font-size: 0.75rem;
+        margin: 0 18px 0 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        max-width: calc(100% - 18px);
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
     <aside class="sidebar">
@@ -101,12 +114,69 @@
     </aside>
     <main class="profile-main">
       <div class="profile-header">
-        <div class="profile-avatar">
-          <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+        <div class="profile-avatar" style="position: relative">
+          <img
+            id="profilePic"
+            src=""
+            alt="Profile Picture"
+            style="
+              width: 72px;
+              height: 72px;
+              border-radius: 50%;
+              object-fit: cover;
+              display: none;
+              position: absolute;
+              top: 0;
+              left: 0;
+            "
+          />
+          <svg
+            id="defaultAvatar"
+            width="72"
+            height="72"
+            viewBox="0 0 72 72"
+            fill="none"
+          >
             <circle cx="36" cy="36" r="36" fill="#014848" />
             <circle cx="36" cy="29" r="13" fill="#fff" />
             <rect x="18" y="48" width="36" height="14" rx="7" fill="#fff" />
           </svg>
+          <label
+            for="uploadPic"
+            style="
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              background: #014848;
+              border-radius: 50%;
+              width: 28px;
+              height: 28px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+            "
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            <input
+              type="file"
+              id="uploadPic"
+              accept="image/*"
+              style="display: none"
+            />
+          </label>
         </div>
         <div class="profile-info">
           <div class="profile-name" id="profileName">User</div>
@@ -308,7 +378,462 @@
           </div>
         </div>
       </div>
+      <button
+        id="addNewsletterBtn"
+        style="
+          position: fixed;
+          bottom: 32px;
+          right: 32px;
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          background: #014848;
+          color: #fff;
+          border: none;
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 200;
+          cursor: pointer;
+          font-size: 2rem;
+        "
+      >
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+      </button>
+      <!-- Newsletter Modal Popup -->
+      <div
+        id="newsletterModal"
+        style="
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.35);
+          z-index: 999;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div
+          style="
+            background: #23272f;
+            padding: 36px 32px 28px 32px;
+            border-radius: 18px;
+            max-width: 520px;
+            width: 96vw;
+            box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.22);
+            position: relative;
+          "
+        >
+          <button
+            id="closeNewsletterModal"
+            style="
+              position: absolute;
+              top: 16px;
+              right: 20px;
+              background: none;
+              border: none;
+              color: #fff;
+              font-size: 2rem;
+              cursor: pointer;
+            "
+          >
+            &times;
+          </button>
+          <h2 style="margin: 0 0 18px 0; color: #fff; font-size: 1.4rem">
+            New Newsletter
+          </h2>
+          <form id="newsletterForm">
+            <input
+              type="text"
+              id="newsletterCaption"
+              placeholder="Caption"
+              maxlength="100"
+              style="
+                width: 100%;
+                max-width: 480px;
+                margin-bottom: 14px;
+                padding: 12px 16px;
+                border-radius: 12px;
+                border: 1.5px solid #014848;
+                font-size: 1.13rem;
+                background: #18191a;
+                color: #fff;
+                box-shadow: 0 2px 8px 0 rgba(1, 72, 72, 0.04);
+                font-weight: 600;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+              "
+            />
+            <div
+              style="
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              "
+            >
+              <label
+                for="newsletterImage"
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                  max-width: 540px;
+                  height: 140px;
+                  border: 2px dashed #014848;
+                  border-radius: 12px;
+                  background: #18191a;
+                  cursor: pointer;
+                  transition: border-color 0.2s;
+                  overflow: hidden;
+                  position: relative;
+                  margin-bottom: 14px;
+                  margin-left: auto;
+                  margin-right: auto;
+                "
+              >
+                <span
+                  id="newsletterImagePreviewText"
+                  style="color: #b5b5c2; font-size: 1rem"
+                  >Add a photo</span
+                >
+                <img
+                  id="newsletterImagePreview"
+                  src=""
+                  alt="Preview"
+                  style="
+                    display: none;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                  "
+                />
+                <input
+                  type="file"
+                  id="newsletterImage"
+                  accept="image/*"
+                  style="display: none"
+                />
+              </label>
+            </div>
+            <div style="margin-bottom: 14px">
+              <div style="display: flex; gap: 10px; margin-bottom: 6px">
+                <button
+                  type="button"
+                  class="rte-btn"
+                  data-cmd="bold"
+                  title="Bold"
+                  style="
+                    background: #014848;
+                    color: #fff;
+                    border: none;
+                    border-radius: 7px;
+                    padding: 6px 13px;
+                    font-weight: 700;
+                    font-size: 1.08rem;
+                    box-shadow: 0 2px 8px 0 rgba(1, 72, 72, 0.08);
+                    cursor: pointer;
+                    transition: background 0.2s;
+                  "
+                >
+                  B
+                </button>
+                <button
+                  type="button"
+                  class="rte-btn"
+                  data-cmd="italic"
+                  title="Italic"
+                  style="
+                    background: #014848;
+                    color: #fff;
+                    border: none;
+                    border-radius: 7px;
+                    padding: 6px 13px;
+                    font-style: italic;
+                    font-weight: 600;
+                    font-size: 1.08rem;
+                    box-shadow: 0 2px 8px 0 rgba(1, 72, 72, 0.08);
+                    cursor: pointer;
+                    transition: background 0.2s;
+                  "
+                >
+                  I
+                </button>
+                <button
+                  type="button"
+                  class="rte-btn"
+                  data-cmd="underline"
+                  title="Underline"
+                  style="
+                    background: #014848;
+                    color: #fff;
+                    border: none;
+                    border-radius: 7px;
+                    padding: 6px 13px;
+                    text-decoration: underline;
+                    font-weight: 600;
+                    font-size: 1.08rem;
+                    box-shadow: 0 2px 8px 0 rgba(1, 72, 72, 0.08);
+                    cursor: pointer;
+                    transition: background 0.2s;
+                  "
+                >
+                  U
+                </button>
+                <select
+                  id="rteFontSize"
+                  style="
+                    border-radius: 7px;
+                    padding: 6px 10px;
+                    border: 1.5px solid #014848;
+                    background: #18191a;
+                    color: #fff;
+                    font-size: 1.08rem;
+                    font-weight: 600;
+                  "
+                >
+                  <option value="">Font Size</option>
+                  <option value="1">Small</option>
+                  <option value="3">Normal</option>
+                  <option value="5">Large</option>
+                  <option value="7">Huge</option>
+                </select>
+                <select
+                  id="rteFontFamily"
+                  style="
+                    border-radius: 7px;
+                    padding: 6px 10px;
+                    border: 1.5px solid #014848;
+                    background: #18191a;
+                    color: #fff;
+                    font-size: 1.08rem;
+                    font-weight: 600;
+                  "
+                >
+                  <option value="">Font Style</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Courier New">Courier New</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Verdana">Verdana</option>
+                </select>
+              </div>
+              <div
+                id="newsletterEditor"
+                contenteditable="true"
+                style="
+                  width: 100%;
+                  max-width: 480px;
+                  min-height: 90px;
+                  resize: vertical;
+                  border-radius: 12px;
+                  padding: 12px 16px;
+                  border: 1px solid #2d2f34;
+                  font-size: 1.13rem;
+                  background: #18191a;
+                  color: #fff;
+                  outline: none;
+                  display: block;
+                  margin-left: auto;
+                  margin-right: auto;
+                "
+              ></div>
+            </div>
+            <button
+              type="submit"
+              style="
+                background: #014848;
+                color: #fff;
+                padding: 12px 0;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+                font-size: 1.15rem;
+                font-weight: 700;
+                cursor: pointer;
+              "
+            >
+              Post
+            </button>
+          </form>
+        </div>
+      </div>
+      <script>
+        // Newsletter Modal logic
+        var addBtn = document.getElementById('addNewsletterBtn');
+        var modal = document.getElementById('newsletterModal');
+        var closeModal = document.getElementById('closeNewsletterModal');
+        addBtn.onclick = function () {
+          modal.style.display = 'flex';
+        };
+        closeModal.onclick = function () {
+          modal.style.display = 'none';
+        };
+        window.onclick = function (e) {
+          if (e.target === modal) modal.style.display = 'none';
+        };
+
+        // Newsletter image preview
+        var newsletterImage = document.getElementById('newsletterImage');
+        var newsletterImagePreview = document.getElementById(
+          'newsletterImagePreview'
+        );
+        var newsletterImagePreviewText = document.getElementById(
+          'newsletterImagePreviewText'
+        );
+        newsletterImage.addEventListener('change', function (e) {
+          var file = e.target.files[0];
+          if (!file) {
+            newsletterImagePreview.style.display = 'none';
+            newsletterImagePreviewText.style.display = 'block';
+            return;
+          }
+          var reader = new FileReader();
+          reader.onload = function (evt) {
+            newsletterImagePreview.src = evt.target.result;
+            newsletterImagePreview.style.display = 'block';
+            newsletterImagePreviewText.style.display = 'none';
+          };
+          reader.readAsDataURL(file);
+        });
+
+        // Rich Text Editor controls
+        document.querySelectorAll('.rte-btn').forEach(function (btn) {
+          btn.onclick = function () {
+            document.execCommand(btn.getAttribute('data-cmd'), false, null);
+          };
+        });
+        document.getElementById('rteFontSize').onchange = function () {
+          var val = this.value;
+          if (val) document.execCommand('fontSize', false, val);
+        };
+        document.getElementById('rteFontFamily').onchange = function () {
+          var val = this.value;
+          if (val) document.execCommand('fontName', false, val);
+        };
+
+        // Newsletter form submit (save to localStorage for demo)
+        var newsletterForm = document.getElementById('newsletterForm');
+        var newsletterCaption = document.getElementById('newsletterCaption');
+        var newsletterEditor = document.getElementById('newsletterEditor');
+        newsletterForm.onsubmit = function (e) {
+          e.preventDefault();
+          var caption = newsletterCaption.value.trim();
+          var content = newsletterEditor.innerHTML.trim();
+          var image =
+            newsletterImagePreview.style.display === 'block'
+              ? newsletterImagePreview.src
+              : '';
+          if (!caption) {
+            alert('Please enter a caption!');
+            return;
+          }
+          if (!content) {
+            alert('Please write your newsletter!');
+            return;
+          }
+          var posts = JSON.parse(localStorage.getItem('newsletters') || '[]');
+          posts.push({ caption: caption, content: content, image: image });
+          localStorage.setItem('newsletters', JSON.stringify(posts));
+          modal.style.display = 'none';
+          newsletterForm.reset();
+          newsletterEditor.innerHTML = '';
+          newsletterImagePreview.style.display = 'none';
+          newsletterImagePreviewText.style.display = 'block';
+          loadNewsletters();
+        };
+
+        // Display newsletters (update as needed)
+        function loadNewsletters() {
+          var userPostsDiv = document.querySelector('.user-posts');
+          var posts = JSON.parse(localStorage.getItem('newsletters') || '[]');
+          userPostsDiv.innerHTML = '';
+          if (posts.length === 0) {
+            userPostsDiv.innerHTML =
+              '<div class="user-post-empty" style="text-align:center;color:#b5b5c2;font-size:1.1rem;padding:32px 0;">You don\'t have any newsletters yet.</div>';
+            return;
+          }
+          posts.reverse().forEach(function (post) {
+            var postDiv = document.createElement('div');
+            postDiv.className = 'user-post';
+            postDiv.style.marginBottom = '18px';
+            if (post.image) {
+              var img = document.createElement('img');
+              img.src = post.image;
+              img.alt = 'Newsletter Image';
+              img.style =
+                'max-width:340px;border-radius:10px;margin-bottom:10px;display:block;';
+              postDiv.appendChild(img);
+            }
+            var captionDiv = document.createElement('div');
+            captionDiv.textContent = post.caption;
+            captionDiv.style =
+              'color:#fff;font-size:1.15rem;font-weight:600;margin-bottom:4px;';
+            postDiv.appendChild(captionDiv);
+            var textDiv = document.createElement('div');
+            textDiv.innerHTML = post.content;
+            textDiv.style =
+              'color:#fff;font-size:1.08rem;white-space:pre-line;';
+            postDiv.appendChild(textDiv);
+            userPostsDiv.appendChild(postDiv);
+          });
+        }
+        loadNewsletters();
+      </script>
     </main>
     <script src="script.js"></script>
+    <script>
+      // Profile picture upload logic
+      var uploadPic = document.getElementById('uploadPic');
+      var profilePic = document.getElementById('profilePic');
+      var defaultAvatar = document.getElementById('defaultAvatar');
+      // Always load saved profile picture on page load
+      function loadProfilePic() {
+        var savedPic = localStorage.getItem('profilePic');
+        if (savedPic) {
+          profilePic.src = savedPic;
+          profilePic.style.display = 'block';
+          defaultAvatar.style.display = 'none';
+        } else {
+          profilePic.style.display = 'none';
+          defaultAvatar.style.display = 'block';
+        }
+      }
+      loadProfilePic();
+      uploadPic.addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+          profilePic.src = evt.target.result;
+          profilePic.style.display = 'block';
+          defaultAvatar.style.display = 'none';
+          localStorage.setItem('profilePic', evt.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    </script>
   </body>
 </html>

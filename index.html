@@ -37,7 +37,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="explore.html">Explore</a></li>
-          <li><a href="feed.html">Feed</a></li>
+          <li><a href="feed.html">Feued</a></li>
           <li><a href="progress.html">Progress</a></li>
           <li><a href="profile.html">Profile</a></li>
         </ul>
@@ -93,7 +93,11 @@
           Share your weekly progress. Stay consistent. Grow your builder
           portfolio.
         </p>
-        <button class="cta main-cta" style="background: #014848" id="getStartedBtn">
+        <button
+          class="cta main-cta"
+          style="background: #014848"
+          id="getStartedBtn"
+        >
           Get Started
         </button>
       </section>
@@ -134,14 +138,30 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="firebase-config.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.firebase && firebase.auth) {
+          firebase.auth().onAuthStateChanged(function (user) {
+            if (!user) {
+              window.location.href = 'landing.html';
+            }
+          });
+        } else {
+          // If Firebase is not loaded, fallback to landing page
+          window.location.href = 'landing.html';
+        }
+      });
+    </script>
     <script src="auth.js"></script>
     <script src="user-navbar.js"></script>
     <script src="script.js"></script>
     <script>
-      document.getElementById('getStartedBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.href = 'explore.html';
-      });
+      document
+        .getElementById('getStartedBtn')
+        .addEventListener('click', function (e) {
+          e.preventDefault();
+          window.location.href = 'explore.html';
+        });
     </script>
   </body>
 </html>
