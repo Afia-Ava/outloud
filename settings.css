@@ -9,6 +9,7 @@ body {
   font-family: 'Inter', Arial, sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 .settings-main {
   margin-left: 320px;
@@ -19,13 +20,15 @@ body {
   font-family: 'Inter', Arial, sans-serif;
 }
 .settings-container {
-  max-width: 540px;
-  margin: 0 auto;
-  background: #23272f;
-  border-radius: 18px;
-  box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.18);
-  padding: 36px 32px 32px 32px;
+  width: 100%;
+  max-width: none;
+  margin: 0 0 0 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
   margin-top: 48px;
+  overflow-x: hidden;
 }
 .settings-title {
   font-size: 1.35rem;
@@ -54,6 +57,9 @@ body {
 }
 .settings-input {
   width: 100%;
+  max-width: 900px;
+  min-width: 220px;
+  box-sizing: border-box;
   padding: 10px 14px;
   border-radius: 8px;
   border: 1.5px solid #014848;
@@ -69,23 +75,96 @@ body {
   cursor: not-allowed;
 }
 .settings-photo-row {
+  position: relative;
+  width: 90vw;
+  min-width: 900px;
+  max-width: 1800px;
+  height: 120px;
+  margin-bottom: 38px;
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+}
+.settings-cover-photo-wrapper {
+  width: 100%;
+  height: 100%;
+  min-width: 900px;
+  max-width: 1800px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #014848;
+}
+
+.settings-cover-photo-wrapper .settings-photo-upload label.settings-btn {
+  min-width: 90px;
+  min-height: 32px;
+  font-size: 0.98rem;
+  padding: 6px 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  gap: 18px;
-  margin-bottom: 18px;
+  justify-content: center;
+  background: #014848;
+  font-weight: 700;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+  margin: 0;
+  transition: background 0.18s;
 }
-.settings-photo-row img {
-  width: 56px;
-  height: 56px;
+.settings-cover-photo-wrapper .settings-photo-upload label.settings-btn:hover {
+  background: #017575;
+}
+#settingsCoverPhoto,
+#settingsDefaultCover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+.settings-profile-photo-wrapper {
+  position: absolute;
+  left: 24px;
+  bottom: -36px;
+  width: 72px;
+  height: 72px;
+  z-index: 2;
+}
+#settingsProfilePhoto,
+#settingsDefaultAvatar {
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   object-fit: cover;
   background: #014848;
+  display: block;
 }
-.settings-photo-row .settings-photo-upload {
+.settings-profile-photo-upload {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+}
+.settings-profile-photo-upload label.settings-btn {
+  padding: 4px 10px;
+  font-size: 0.92rem;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  background: #014848;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+  margin: 0;
 }
+.settings-profile-photo-upload label.settings-btn:hover {
+  background: #017575;
+}
+/* Removed old .settings-photo-row img rule, handled above */
+/* Removed old .settings-photo-upload rule, handled above */
 .settings-btn {
   background: #014848;
   color: #fff;

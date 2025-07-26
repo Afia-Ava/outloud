@@ -115,10 +115,10 @@ document.getElementById('logoutBtn').addEventListener('click', function () {
       .auth()
       .signOut()
       .then(function () {
-        window.location.href = 'index.html';
+        window.location.href = 'landing.html';
       });
   } else {
-    window.location.href = 'index.html';
+    window.location.href = 'landing.html';
   }
 });
 document
