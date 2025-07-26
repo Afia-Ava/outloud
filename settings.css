@@ -1,0 +1,120 @@
+.sidebar {
+  background: #012c2c !important;
+  color: #f5f6fa;
+  font-family: 'Inter', Arial, sans-serif;
+}
+body {
+  background: #18191a;
+  color: #f5f6fa;
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.settings-main {
+  margin-left: 320px;
+  padding: 48px 32px 80px 0;
+  min-height: 100vh;
+  background: #18191a;
+  color: #f5f6fa;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.settings-container {
+  max-width: 540px;
+  margin: 0 auto;
+  background: #23272f;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.18);
+  padding: 36px 32px 32px 32px;
+  margin-top: 48px;
+}
+.settings-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #fff;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.settings-section {
+  margin-bottom: 32px;
+}
+.settings-section-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #fff;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.settings-label {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #aaa;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.settings-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #014848;
+  background: #18191a;
+  color: #f5f6fa;
+  font-size: 1.08rem;
+  margin-bottom: 18px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.settings-input[readonly] {
+  background: #23272f;
+  color: #aaa;
+  cursor: not-allowed;
+}
+.settings-photo-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.settings-photo-row img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #014848;
+}
+.settings-photo-row .settings-photo-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.settings-btn {
+  background: #014848;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.18s;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.settings-btn:hover {
+  background: #017575;
+}
+.settings-danger {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.18s;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.settings-danger:hover {
+  background: #b71c1c;
+}

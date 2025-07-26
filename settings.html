@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>outloud – Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="settings.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="logo" style="padding-left: 32px; margin-bottom: 18px">
+        <a
+          href="index.html"
+          style="
+            color: #fff !important;
+            font-family: 'Satoshi', Arial, sans-serif !important;
+            font-size: 2.1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 12px rgba(1, 72, 72, 0.18), 0 1px 0 #014848;
+            transition: color 0.2s;
+            text-decoration: none;
+          "
+          >outloud</a
+        >
+      </div>
+      <nav>
+        <ul style="padding-left: 0; margin: 0; list-style: none">
+          <li
+            style="
+              margin-bottom: 0;
+              border-bottom: none;
+              padding: 10px 0 10px 0;
+              text-align: left;
+              position: relative;
+            "
+          >
+            <a
+              href="index.html"
+              style="
+                display: block;
+                color: #fff !important;
+                font-family: 'Satoshi', Arial, sans-serif !important;
+                font-weight: 500;
+                letter-spacing: 1px;
+                font-size: 1.18rem;
+                transition: color 0.2s;
+                text-decoration: none;
+                text-align: left;
+                padding-left: 32px;
+              "
+              >Home</a
+            >
+          </li>
+          <li
+            style="
+              margin-bottom: 0;
+              border-bottom: none;
+              padding: 10px 0 10px 0;
+              text-align: left;
+              position: relative;
+            "
+          >
+            <a
+              href="explore.html"
+              style="
+                display: block;
+                color: #fff !important;
+                font-family: 'Satoshi', Arial, sans-serif !important;
+                font-weight: 500;
+                letter-spacing: 1px;
+                font-size: 1.18rem;
+                transition: color 0.2s;
+                text-decoration: none;
+                text-align: left;
+                padding-left: 32px;
+              "
+              >Explore</a
+            >
+          </li>
+          <li
+            style="
+              margin-bottom: 0;
+              border-bottom: none;
+              padding: 10px 0 10px 0;
+              text-align: left;
+              position: relative;
+            "
+          >
+            <a
+              href="progress.html"
+              style="
+                display: block;
+                color: #fff !important;
+                font-family: 'Satoshi', Arial, sans-serif !important;
+                font-weight: 500;
+                letter-spacing: 1px;
+                font-size: 1.18rem;
+                transition: color 0.2s;
+                text-decoration: none;
+                text-align: left;
+                padding-left: 32px;
+              "
+              >Progress</a
+            >
+          </li>
+          <li
+            style="
+              margin-bottom: 0;
+              border-bottom: none;
+              padding: 10px 0 10px 0;
+              text-align: left;
+              position: relative;
+            "
+          >
+            <a
+              href="profile.html"
+              class="active"
+              style="
+                display: block;
+                color: #fff !important;
+                font-family: 'Satoshi', Arial, sans-serif !important;
+                font-weight: 500;
+                letter-spacing: 1px;
+                font-size: 1.18rem;
+                transition: color 0.2s;
+                text-decoration: none;
+                text-align: left;
+                padding-left: 32px;
+              "
+              >Profile</a
+            >
+          </li>
+          <!-- Settings option removed from sidebar -->
+        </ul>
+      </nav>
+      <div style="flex: 1"></div>
+      <div
+        style="
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 220px;
+          display: flex;
+          align-items: center;
+          padding-bottom: 18px;
+          z-index: 20;
+          padding-left: 32px;
+        "
+      >
+        <img
+          id="sidebarProfilePic"
+          src=""
+          alt="Profile Picture"
+          style="
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #012c2c;
+            display: none;
+          "
+        />
+        <svg
+          id="sidebarDefaultAvatar"
+          width="38"
+          height="38"
+          viewBox="0 0 72 72"
+          fill="none"
+          style="display: none"
+        >
+          <circle cx="36" cy="36" r="36" fill="#012c2c" />
+          <circle cx="36" cy="29" r="13" fill="#fff" />
+          <rect x="18" y="48" width="36" height="14" rx="7" fill="#fff" />
+        </svg>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            margin-left: 12px;
+            width: 100%;
+          "
+        >
+          <span
+            id="sidebarProfileName"
+            style="
+              color: #fff;
+              font-size: 1.08rem;
+              font-weight: 600;
+              margin-right: 8px;
+              display: inline-block;
+              line-height: 1.2;
+              font-family: 'Satoshi', Arial, sans-serif !important;
+            "
+            >User</span
+          >
+          <span
+            id="sidebarMenuBtn"
+            style="
+              margin-left: auto;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              position: relative;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="5" cy="12" r="1.5" />
+              <circle cx="12" cy="12" r="1.5" />
+              <circle cx="19" cy="12" r="1.5" />
+            </svg>
+            <div
+              id="sidebarMenuPopup"
+              style="
+                display: none;
+                position: absolute;
+                right: 0;
+                bottom: 32px;
+                background: #23272f;
+                border-radius: 12px;
+                box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.18);
+                min-width: 148px;
+                z-index: 9999;
+                padding: 8px 0;
+                border: none;
+              "
+            >
+              <button
+                id="sidebarSettingsBtn"
+                style="
+                  width: 100%;
+                  background: none;
+                  border: none;
+                  color: #fff;
+                  font-size: 1.08rem;
+                  font-family: 'Satoshi', Arial, sans-serif !important;
+                  text-align: left;
+                  padding: 10px 22px;
+                  cursor: pointer;
+                  transition: background 0.18s;
+                  border-radius: 0;
+                  outline: none;
+                  display: flex;
+                  align-items: center;
+                  border-bottom: 1px solid #01484844;
+                "
+                onmouseover="this.style.background='#01484822'"
+                onmouseout="this.style.background='none'"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#b2fefa"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="margin-right: 10px"
+                >
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09c0 .66.38 1.25 1 1.51a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 8c.66 0 1.25.38 1.51 1H21a2 2 0 1 1 0 4h-.09c-.66 0-1.25.38-1.51 1z"
+                  />
+                </svg>
+                Settings
+              </button>
+              <button
+                id="sidebarLogoutBtn"
+                style="
+                  width: 100%;
+                  background: none;
+                  border: none;
+                  color: #fff;
+                  font-size: 1.08rem;
+                  font-family: 'Satoshi', Arial, sans-serif !important;
+                  text-align: left;
+                  padding: 10px 22px;
+                  cursor: pointer;
+                  transition: background 0.18s;
+                  border-radius: 0;
+                  outline: none;
+                  display: flex;
+                  align-items: center;
+                  border-bottom: none;
+                "
+                onmouseover="this.style.background='#01484822'"
+                onmouseout="this.style.background='none'"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#b2fefa"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="margin-right: 10px"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log Out
+              </button>
+            </div>
+          </span>
+        </div>
+      </div>
+    </aside>
+    <script src="settings.js"></script>
+    <script>
+      (function () {
+        var sidebarProfilePic = document.getElementById('sidebarProfilePic');
+        var sidebarDefaultAvatar = document.getElementById(
+          'sidebarDefaultAvatar'
+        );
+        var sidebarProfileName = document.getElementById('sidebarProfileName');
+        var savedPic = localStorage.getItem('profilePic');
+        if (savedPic) {
+          sidebarProfilePic.src = savedPic;
+          sidebarProfilePic.style.display = 'block';
+          sidebarDefaultAvatar.style.display = 'none';
+        } else {
+          sidebarProfilePic.style.display = 'none';
+          sidebarDefaultAvatar.style.display = 'block';
+        }
+        function setSidebarName(name) {
+          sidebarProfileName.textContent = name || 'User';
+        }
+        if (window.firebase && firebase.auth) {
+          firebase.auth().onAuthStateChanged(function (user) {
+            if (user && user.displayName) {
+              setSidebarName(user.displayName);
+            } else if (user && user.email) {
+              setSidebarName(user.email.split('@')[0]);
+            } else {
+              var localName = localStorage.getItem('userName') || 'User';
+              setSidebarName(localName);
+            }
+          });
+        } else {
+          var localName = localStorage.getItem('userName') || 'User';
+          setSidebarName(localName);
+        }
+      })();
+      var sidebarMenuBtn = document.getElementById('sidebarMenuBtn');
+      var sidebarMenuPopup = document.getElementById('sidebarMenuPopup');
+      if (sidebarMenuBtn && sidebarMenuPopup) {
+        sidebarMenuBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          sidebarMenuPopup.style.display =
+            sidebarMenuPopup.style.display === 'block' ? 'none' : 'block';
+        });
+        document.addEventListener('click', function (e) {
+          if (
+            !sidebarMenuPopup.contains(e.target) &&
+            e.target !== sidebarMenuBtn
+          ) {
+            sidebarMenuPopup.style.display = 'none';
+          }
+        });
+        var sidebarSettingsBtn = document.getElementById('sidebarSettingsBtn');
+        if (sidebarSettingsBtn) {
+          sidebarSettingsBtn.onclick = function () {
+            sidebarMenuPopup.style.display = 'none';
+            window.location.href = 'settings.html';
+          };
+        }
+        var sidebarLogoutBtn = document.getElementById('sidebarLogoutBtn');
+        if (sidebarLogoutBtn) {
+          sidebarLogoutBtn.addEventListener('click', function () {
+            sidebarMenuPopup.style.display = 'none';
+            if (window.firebase && firebase.auth) {
+              firebase
+                .auth()
+                .signOut()
+                .then(function () {
+                  window.location.href = 'index.html';
+                });
+            } else {
+              window.location.href = 'index.html';
+            }
+          });
+        }
+      }
+    </script>
+    <main class="settings-main">
+      <div class="settings-container">
+        <div class="settings-title">Settings</div>
+        <div class="settings-section">
+          <div class="settings-section-title">Profile</div>
+          <label class="settings-label" for="settingsName">Name</label>
+          <input
+            class="settings-input"
+            id="settingsName"
+            type="text"
+            placeholder="Your name"
+          />
+          <label class="settings-label" for="settingsUsername">Username</label>
+          <input
+            class="settings-input"
+            id="settingsUsername"
+            type="text"
+            placeholder="Username"
+          />
+          <label class="settings-label" for="settingsAbout">About you</label>
+          <input
+            class="settings-input"
+            id="settingsAbout"
+            type="text"
+            placeholder="About you"
+          />
+          <label class="settings-label" for="settingsLocation">Location</label>
+          <input
+            class="settings-input"
+            id="settingsLocation"
+            type="text"
+            placeholder="Location"
+          />
+          <div class="settings-photo-row">
+            <div>
+              <img
+                id="settingsProfilePhoto"
+                src=""
+                alt="Profile Photo"
+                style="display: none"
+              />
+              <svg
+                id="settingsDefaultAvatar"
+                width="56"
+                height="56"
+                viewBox="0 0 72 72"
+                fill="none"
+                style="display: none"
+              >
+                <circle cx="36" cy="36" r="36" fill="#014848" />
+                <circle cx="36" cy="29" r="13" fill="#fff" />
+                <rect x="18" y="48" width="36" height="14" rx="7" fill="#fff" />
+              </svg>
+            </div>
+            <div class="settings-photo-upload">
+              <label
+                for="settingsProfilePhotoInput"
+                class="settings-btn"
+                style="padding: 6px 16px; font-size: 0.98rem"
+                >Change Profile Photo</label
+              >
+              <input
+                type="file"
+                id="settingsProfilePhotoInput"
+                accept="image/*"
+                style="display: none"
+              />
+            </div>
+          </div>
+          <div class="settings-photo-row">
+            <div>
+              <img
+                id="settingsCoverPhoto"
+                src=""
+                alt="Cover Photo"
+                style="
+                  width: 120px;
+                  height: 56px;
+                  border-radius: 12px;
+                  object-fit: cover;
+                  display: none;
+                  background: #014848;
+                "
+              />
+              <svg
+                id="settingsDefaultCover"
+                width="120"
+                height="56"
+                viewBox="0 0 120 56"
+                fill="none"
+                style="display: none"
+              >
+                <rect width="120" height="56" rx="12" fill="#014848" />
+              </svg>
+            </div>
+            <div class="settings-photo-upload">
+              <label
+                for="settingsCoverPhotoInput"
+                class="settings-btn"
+                style="padding: 6px 16px; font-size: 0.98rem"
+                >Change Cover Photo</label
+              >
+              <input
+                type="file"
+                id="settingsCoverPhotoInput"
+                accept="image/*"
+                style="display: none"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section-title">Account</div>
+          <label class="settings-label" for="settingsEmail">Email</label>
+          <input
+            class="settings-input"
+            id="settingsEmail"
+            type="email"
+            readonly
+          />
+          <button class="settings-btn" id="changePasswordBtn">
+            Change password
+          </button>
+          <button class="settings-btn" id="logoutBtn">Log out</button>
+          <button class="settings-danger" id="deleteAccountBtn">
+            Request account deletion
+          </button>
+        </div>
+      </div>
+    </main>
+    <script src="settings.js"></script>
+  </body>
+</html>
