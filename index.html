@@ -50,7 +50,7 @@
           bottom: 0;
           width: 220px;
           display: flex;
-          justify-content: center;
+          flex-direction: column;
           align-items: center;
           padding-bottom: 18px;
           z-index: 20;
@@ -67,9 +67,23 @@
             font-size: 1rem;
             text-decoration: none;
             box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+            margin-bottom: 10px;
           "
           >Join</a
         >
+        <div
+          style="
+            width: 100%;
+            text-align: center;
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #014848;
+            letter-spacing: 0.2px;
+          "
+        >
+          afiakhanomava
+        </div>
       </div>
     </aside>
     <main class="main-content">
@@ -79,7 +93,7 @@
           Share your weekly progress. Stay consistent. Grow your builder
           portfolio.
         </p>
-        <button class="cta main-cta" style="background: #014848">
+        <button class="cta main-cta" style="background: #014848" id="getStartedBtn">
           Get Started
         </button>
       </section>
@@ -123,5 +137,11 @@
     <script src="auth.js"></script>
     <script src="user-navbar.js"></script>
     <script src="script.js"></script>
+    <script>
+      document.getElementById('getStartedBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'explore.html';
+      });
+    </script>
   </body>
 </html>

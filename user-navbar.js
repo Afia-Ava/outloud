@@ -95,8 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
       logoutBtn.onclick = () => {
         if (typeof logout === 'function') {
           logout().then(() => {
-            // Remove user block and show Join button again
-            joinBtnDiv.innerHTML = `<a href="login.html" style="background:#014848;color:#fff;padding:10px 32px;border-radius:8px;font-weight:600;font-size:1rem;text-decoration:none;box-shadow:0 2px 8px 0 rgba(0,0,0,0.08);">Join</a>`;
+            window.location.href = 'login.html';
           });
         }
         menu.style.display = 'none';

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <style>
       body {
-        background: #18191a;
+        background: #012626;
         color: #f5f6fa;
         font-family: 'Inter', Arial, sans-serif;
         margin: 0;
@@ -60,7 +60,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #18191a;
+        background: #012626;
       }
       .auth-container {
         background: #23272f;
@@ -170,23 +170,10 @@
       }
     </style>
   </head>
-    <aside class="sidebar">
-      <div class="logo"><a href="index.html" style="color:inherit;text-decoration:none;">outloud</a></div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="explore.html">Explore</a></li>
-          <li><a href="feed.html">Feed</a></li>
-          <li><a href="progress.html">Progress</a></li>
-          <li><a href="profile.html">Profile</a></li>
-        </ul>
-      </nav>
-      <div style="flex:1"></div>
-      <div style="position:fixed;left:0;bottom:0;width:220px;display:flex;justify-content:center;align-items:center;padding-bottom:18px;z-index:20;">
-        <a href="login.html" style="background:#014848;color:#fff;padding:10px 32px;border-radius:8px;font-weight:600;font-size:1rem;text-decoration:none;box-shadow:0 2px 8px 0 rgba(0,0,0,0.08);">Join</a>
-      </div>
-    </aside>
-    <main class="auth-main">
+    <div style="position:fixed;top:32px;left:32px;z-index:100;">
+      <span style="font-family:'Inter',Arial,sans-serif;font-size:2rem;font-weight:700;letter-spacing:0.5px;color:#fff;">outloud</span>
+    </div>
+    <main class="auth-main" style="margin-left:0;width:100vw;">
       <div class="auth-container" id="authContainer">
         <form id="loginForm">
           <div class="auth-title">Welcome back</div>
@@ -204,6 +191,9 @@
         </form>
         <!-- Sign Up Form (hidden by default) -->
         <form id="signupForm" style="display:none;">
+          <div style="width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:12px;">
+            <span style="font-family:'Inter',Arial,sans-serif;font-size:2rem;font-weight:700;letter-spacing:0.5px;color:#fff;">outloud</span>
+          </div>
           <div class="auth-title">Sign up</div>
           <div class="auth-subtitle">Sign up and start sharing your journey</div>
           <label class="auth-label" for="signup-name">Name or Username</label>
@@ -246,7 +236,7 @@
           const password = loginForm.querySelector('input[type="password"]').value;
           login(email, password)
             .then(() => {
-              window.location.href = 'index.html';
+              window.location.href = 'main.html';
             })
             .catch(err => {
               alert('Login failed: ' + (err.message || err));
@@ -262,8 +252,7 @@
               return userCredential.user.updateProfile({ displayName: name }).then(() => userCredential);
             })
             .then(() => {
-              alert('Sign up successful!');
-              window.location.href = 'index.html';
+              window.location.href = 'main.html'; // new landing page
             })
             .catch(err => {
               alert('Sign up failed: ' + (err.message || err));
