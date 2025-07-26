@@ -5,19 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>outloud – Explore</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       .sidebar {
         width: 220px;
         min-height: 100vh;
-        background: #23272f;
+        background: #012c2c;
+        color: #fff;
         position: fixed;
         top: 0;
         left: 0;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding-top: 32px;
+        padding-top: 0;
         z-index: 10;
+        font-family: 'Satoshi', Arial, sans-serif !important;
+      }
+      .sidebar a,
+      .sidebar nav ul li a {
+        color: #fff !important;
+        font-family: 'Satoshi', Arial, sans-serif !important;
+        font-weight: 500;
+        letter-spacing: 1px;
+        font-size: 1.18rem;
+        transition: color 0.2s;
+      }
+      .sidebar nav ul {
+        padding-left: 0;
+        margin: 0;
+        list-style: none;
+      }
+      .sidebar nav ul li {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding: 10px 0 10px 0;
+        text-align: left;
+        position: relative;
+      }
+      .sidebar nav ul li:last-child {
+        border-bottom: none;
+      }
+      .sidebar nav ul li::after {
+        display: none !important;
+      }
+      .sidebar nav ul li a {
+        display: block;
+        color: #fff !important;
+        font-family: 'Satoshi', Arial, sans-serif !important;
+        font-weight: 500;
+        letter-spacing: 1px;
+        font-size: 1.18rem;
+        transition: color 0.2s;
+        text-decoration: none;
+        text-align: left;
+        padding-left: 32px;
+      }
+      .sidebar .logo {
+        padding-left: 32px;
+        margin-top: 32px;
+        margin-bottom: 18px;
+      }
+      .sidebar .logo a {
+        color: #fff !important;
+        font-family: 'Satoshi', Arial, sans-serif !important;
+        font-size: 2.1rem;
+        font-weight: 500;
+        letter-spacing: 2px;
+        color: #fff !important;
+        text-shadow: 0 2px 12px rgba(1, 72, 72, 0.18), 0 1px 0 #014848;
+        transition: color 0.2s;
+      }
+      .sidebar .logo a:hover {
+        color: #b2fefa !important;
+        text-shadow: 0 2px 18px #01484844;
+      }
+      .sidebar nav ul li a:hover {
+        color: #b2fefa !important;
+      }
+      .sidebar button,
+      .sidebar a[style*='background: #014848'] {
+        background: #014848 !important;
+        color: #fff !important;
+        border: 2px solid #014848 !important;
+        box-shadow: none !important;
+      }
+      .sidebar button:hover,
+      .sidebar a[style*='background: #014848']:hover {
+        background: #012c2c !important;
+        color: #fff !important;
+        border: 2px solid #014848 !important;
       }
     </style>
     <style>
@@ -169,8 +251,7 @@
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="#" class="active">Explore</a></li>
-          <li><a href="feed.html">Feed</a></li>
+          <li><a href="explore.html" class="active">Explore</a></li>
           <li><a href="progress.html">Progress</a></li>
           <li><a href="profile.html">Profile</a></li>
         </ul>
@@ -183,149 +264,658 @@
           bottom: 0;
           width: 220px;
           display: flex;
-          justify-content: center;
           align-items: center;
           padding-bottom: 18px;
           z-index: 20;
+          padding-left: 32px;
         "
       >
-        <a
-          href="login.html"
+        <img
+          id="sidebarProfilePic"
+          src=""
+          alt="Profile Picture"
           style="
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
             background: #014848;
-            color: #fff;
-            padding: 10px 32px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+            display: none;
           "
-          >Join</a
+        />
+        <svg
+          id="sidebarDefaultAvatar"
+          width="38"
+          height="38"
+          viewBox="0 0 72 72"
+          fill="none"
+          style="display: none"
         >
+          <circle cx="36" cy="36" r="36" fill="#014848" />
+          <circle cx="36" cy="29" r="13" fill="#fff" />
+          <rect x="18" y="48" width="36" height="14" rx="7" fill="#fff" />
+        </svg>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            margin-left: 12px;
+            width: 100%;
+          "
+        >
+          <span
+            id="sidebarProfileName"
+            style="
+              color: #fff;
+              font-size: 1.08rem;
+              font-weight: 600;
+              margin-right: 8px;
+              display: inline-block;
+              line-height: 1.2;
+            "
+            >User</span
+          >
+          <span
+            id="sidebarMenuBtn"
+            style="
+              margin-left: auto;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              position: relative;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="5" cy="12" r="1.5" />
+              <circle cx="12" cy="12" r="1.5" />
+              <circle cx="19" cy="12" r="1.5" />
+            </svg>
+            <div
+              id="sidebarMenuPopup"
+              style="
+                display: none;
+                position: absolute;
+                right: 0;
+                bottom: 32px;
+                background: #23272f;
+                border-radius: 12px;
+                box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.18);
+                min-width: 148px;
+                z-index: 9999;
+                padding: 8px 0;
+                border: none;
+              "
+            >
+              <button
+                id="sidebarSettingsBtn"
+                style="
+                  width: 100%;
+                  background: none;
+                  border: none;
+                  color: #fff;
+                  font-size: 1.08rem;
+                  font-family: 'Satoshi', Arial, sans-serif;
+                  text-align: left;
+                  padding: 10px 22px;
+                  cursor: pointer;
+                  transition: background 0.18s;
+                  border-radius: 0;
+                  outline: none;
+                  display: flex;
+                  align-items: center;
+                  border-bottom: 1px solid #01484844;
+                "
+                onmouseover="this.style.background='#01484822'"
+                onmouseout="this.style.background='none'"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#b2fefa"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="margin-right: 10px"
+                >
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09c0 .66.38 1.25 1 1.51a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 8c.66 0 1.25.38 1.51 1H21a2 2 0 1 1 0 4h-.09c-.66 0-1.25.38-1.51 1z"
+                  />
+                </svg>
+                Settings
+              </button>
+              <button
+                id="sidebarLogoutBtn"
+                style="
+                  width: 100%;
+                  background: none;
+                  border: none;
+                  color: #fff;
+                  font-size: 1.08rem;
+                  font-family: 'Satoshi', Arial, sans-serif;
+                  text-align: left;
+                  padding: 10px 22px;
+                  cursor: pointer;
+                  transition: background 0.18s;
+                  border-radius: 0;
+                  outline: none;
+                  display: flex;
+                  align-items: center;
+                  border-bottom: none;
+                "
+                onmouseover="this.style.background='#01484822'"
+                onmouseout="this.style.background='none'"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#b2fefa"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="margin-right: 10px"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log Out
+              </button>
+            </div>
+          </span>
+        </div>
       </div>
     </aside>
     <main class="explore-main">
-      <div class="spotlight-carousel">
-        <div class="spotlight-card">
-          🔖 <b>Post of the Day</b><br />“Shipped my first SaaS MVP!”
-        </div>
-        <div class="spotlight-card">
-          💭 <b>Most Reflective</b><br />“What I learned from failing my first
-          launch.”
-        </div>
-        <div class="spotlight-card">
-          🎉 <b>First-time Poster!</b><br />@sam_dev just joined!
-        </div>
+      <div
+        style="
+          font-family: 'Satoshi', Arial, sans-serif;
+          font-size: 2.1rem;
+          font-weight: 700;
+          color: #fff;
+          margin-bottom: 32px;
+          margin-top: 0;
+          letter-spacing: 1px;
+          line-height: 1.2;
+          text-align: left;
+        "
+      >
+        Explore
       </div>
-      <div class="explore-filters">
-        <button class="chip active">Newest</button>
-        <button class="chip">Most Loved</button>
-        <button class="chip">Most Commented</button>
-        <button class="chip">Streak Maintained</button>
-        <button class="chip">#AI</button>
-        <button class="chip">#WebApp</button>
-        <button class="chip">#Wellness</button>
-        <button class="chip">#Bootstrapping</button>
-        <button class="chip">Building</button>
-        <button class="chip">Learning</button>
-        <button class="chip">Reflecting</button>
-        <button class="chip">Overwhelmed</button>
-        <button class="chip">Launch</button>
-        <button class="chip">Traction</button>
-        <button class="chip">Figuring it out</button>
-        <button class="chip">🔥 Popular This Week</button>
-      </div>
-      <!-- Main Feed -->
-      <div class="feed-list">
-        <div class="post-preview">
-          <div class="post-avatar"></div>
-          <div class="post-content">
-            <div class="post-meta">
-              <span class="post-user">@ava</span>
-              <span>·</span>
-              <span>2h ago</span>
+      <section style="margin-top: 18px">
+        <div
+          style="
+            font-family: 'Satoshi', Arial, sans-serif;
+            font-size: 1.13rem;
+            color: #fff;
+            font-weight: 500;
+            margin-bottom: 18px;
+            margin-left: 2px;
+            letter-spacing: 0.2px;
+          "
+        >
+          Articles from outloud
+        </div>
+        <div
+          class="user-posts"
+          style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            justify-items: center;
+          "
+        >
+          <!-- Article 1 -->
+          <div
+            class="user-post"
+            style="
+              background: transparent;
+              border: 1.5px solid #23272f;
+              border-radius: 8px;
+              box-shadow: none;
+              padding: 0 0 16px 0;
+              display: flex;
+              flex-direction: column;
+              align-items: stretch;
+              min-width: 0;
+              min-height: 0;
+              overflow: hidden;
+              width: 100%;
+              max-width: 100%;
+              height: 220px;
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
+              alt="Article 1"
+              style="
+                width: 100%;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 8px 8px 0 0;
+                margin-bottom: 0;
+                display: block;
+              "
+            />
+            <div
+              style="
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                gap: 4px;
+                padding: 8px 18px 0 0;
+              "
+            >
+              <button
+                type="button"
+                style="
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <svg
+                  class="heart-icon"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="2.1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                style="
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <svg
+                  class="save-icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="2.1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M7.5 3h9A1.5 1.5 0 0 1 18 4.5v15.2a1 1 0 0 1-1.5.87L12 18.1l-4.5 2.47A1 1 0 0 1 6 19.7V4.5A1.5 1.5 0 0 1 7.5 3z"
+                  />
+                </svg>
+              </button>
             </div>
-            <div class="post-title">
-              🚀 Shipped MVP for my climate tech project!
+            <div
+              class="user-post-caption"
+              style="
+                color: #fff;
+                font-size: 1.05rem;
+                font-weight: 600;
+                margin: 14px 18px 2px 16px;
+                max-width: calc(100% - 18px);
+                box-sizing: border-box;
+                /* Show full text, no ellipsis, allow wrapping */
+                white-space: normal;
+                overflow: visible;
+                text-overflow: unset;
+              "
+            >
+              You don’t truly understand something until you write it down
             </div>
-            <div class="post-tags">
-              <span class="tag">#WebApp</span>
-              <span class="tag">early-stage</span>
+            <div
+              class="user-post-firstline"
+              style="
+                color: #b5b5c2;
+                font-size: 0.85rem;
+                margin: 0 18px 0 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: calc(100% - 18px);
+                box-sizing: border-box;
+              "
+            >
+              Why Writing Brings Clarity to Life
             </div>
-            <div class="post-body">
-              Hit all my goals, but ran into some API rate limits. Next up:
-              onboarding flow.
+          </div>
+          <!-- Article 2 -->
+          <div
+            class="user-post"
+            style="
+              background: transparent;
+              border: 1.5px solid #23272f;
+              border-radius: 8px;
+              box-shadow: none;
+              padding: 0 0 16px 0;
+              display: flex;
+              flex-direction: column;
+              align-items: stretch;
+              min-width: 0;
+              min-height: 0;
+              overflow: hidden;
+              width: 100%;
+              max-width: 100%;
+              height: 220px;
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80"
+              alt="Article 2"
+              style="
+                width: 100%;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 8px 8px 0 0;
+                margin-bottom: 0;
+                display: block;
+              "
+            />
+            <div
+              style="
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                gap: 4px;
+                padding: 8px 18px 0 0;
+              "
+            >
+              <button
+                type="button"
+                style="
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <svg
+                  class="heart-icon"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="2.1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                style="
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <svg
+                  class="save-icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="2.1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M7.5 3h9A1.5 1.5 0 0 1 18 4.5v15.2a1 1 0 0 1-1.5.87L12 18.1l-4.5 2.47A1 1 0 0 1 6 19.7V4.5A1.5 1.5 0 0 1 7.5 3z"
+                  />
+                </svg>
+              </button>
             </div>
-            <div class="post-actions">
-              <span>❤️ 12</span>
-              <span>🔁 3</span>
-              <span>💬 2</span>
+            <div
+              class="user-post-caption"
+              style="
+                color: #fff;
+                font-size: 1.05rem;
+                font-weight: 600;
+                margin: 14px 18px 2px 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: calc(100% - 18px);
+                box-sizing: border-box;
+              "
+            >
+              Article 2 Title
+            </div>
+            <div
+              class="user-post-firstline"
+              style="
+                color: #b5b5c2;
+                font-size: 0.85rem;
+                margin: 0 18px 0 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: calc(100% - 18px);
+                box-sizing: border-box;
+              "
+            >
+              Article 2 Subtitle or First Line
+            </div>
+          </div>
+          <!-- Article 3 -->
+          <div
+            class="user-post"
+            style="
+              background: transparent;
+              border: 1.5px solid #23272f;
+              border-radius: 8px;
+              box-shadow: none;
+              padding: 0 0 16px 0;
+              display: flex;
+              flex-direction: column;
+              align-items: stretch;
+              min-width: 0;
+              min-height: 0;
+              overflow: hidden;
+              width: 100%;
+              max-width: 100%;
+              height: 220px;
+            "
+          >
+            <img
+              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+              alt="Article 3"
+              style="
+                width: 100%;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 8px 8px 0 0;
+                margin-bottom: 0;
+                display: block;
+              "
+            />
+            <div
+              style="
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                gap: 4px;
+                padding: 8px 18px 0 0;
+              "
+            >
+              <button
+                type="button"
+                style="
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <svg
+                  class="heart-icon"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="2.1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                style="
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <svg
+                  class="save-icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="2.1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M7.5 3h9A1.5 1.5 0 0 1 18 4.5v15.2a1 1 0 0 1-1.5.87L12 18.1l-4.5 2.47A1 1 0 0 1 6 19.7V4.5A1.5 1.5 0 0 1 7.5 3z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              class="user-post-caption"
+              style="
+                color: #fff;
+                font-size: 1.05rem;
+                font-weight: 600;
+                margin: 14px 18px 2px 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: calc(100% - 18px);
+                box-sizing: border-box;
+              "
+            >
+              Article 3 Title
+            </div>
+            <div
+              class="user-post-firstline"
+              style="
+                color: #b5b5c2;
+                font-size: 0.85rem;
+                margin: 0 18px 0 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+                max-width: calc(100% - 18px);
+                box-sizing: border-box;
+              "
+            >
+              Article 3 Subtitle or First Line
             </div>
           </div>
         </div>
-        <div class="post-preview">
-          <div class="post-avatar"></div>
-          <div class="post-content">
-            <div class="post-meta">
-              <span class="post-user">@jules</span>
-              <span>·</span>
-              <span>5h ago</span>
-            </div>
-            <div class="post-title">🧠 Debugging payment flow</div>
-            <div class="post-tags">
-              <span class="tag">#SaaS</span>
-              <span class="tag">debugging</span>
-            </div>
-            <div class="post-body">
-              Stripe webhooks are a pain! But I finally got it working.
-              Launching soon 🚀
-            </div>
-            <div class="post-actions">
-              <span>❤️ 7</span>
-              <span>🔁 1</span>
-              <span>💬 0</span>
-            </div>
-          </div>
-        </div>
-        <div class="post-preview">
-          <div class="post-avatar"></div>
-          <div class="post-content">
-            <div class="post-meta">
-              <span class="post-user">@sam_dev</span>
-              <span>·</span>
-              <span>1d ago</span>
-            </div>
-            <div class="post-title">
-              💭 Reflecting on my first week building in public
-            </div>
-            <div class="post-tags">
-              <span class="tag">reflecting</span>
-              <span class="tag">#AI</span>
-            </div>
-            <div class="post-body">
-              It’s scary to share, but I’m glad I started. Thanks for the
-              support!
-            </div>
-            <div class="post-actions">
-              <span>❤️ 15</span>
-              <span>🔁 2</span>
-              <span>💬 4</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Smart Suggestions -->
-      <div class="suggestions">
-        <b>Liked this?</b> Here are more logs from
-        <span style="color: #fff">@ava</span>.<br />
-        Other builders posting about <span style="color: #fff">#AI</span> this
-        week.
-      </div>
+      </section>
     </main>
-    <button class="sticky-cta">
-      + Post &nbsp; What are you working on right now?
-    </button>
+
     <script src="script.js"></script>
+    <script src="explore-userbar.js"></script>
+    <script>
+      (function () {
+        var sidebarMenuBtn = document.getElementById('sidebarMenuBtn');
+        var sidebarMenuPopup = document.getElementById('sidebarMenuPopup');
+        if (sidebarMenuBtn && sidebarMenuPopup) {
+          sidebarMenuBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            sidebarMenuPopup.style.display =
+              sidebarMenuPopup.style.display === 'block' ? 'none' : 'block';
+          });
+          document.addEventListener('click', function (e) {
+            if (
+              !sidebarMenuPopup.contains(e.target) &&
+              e.target !== sidebarMenuBtn
+            ) {
+              sidebarMenuPopup.style.display = 'none';
+            }
+          });
+          var sidebarSettingsBtn =
+            document.getElementById('sidebarSettingsBtn');
+          if (sidebarSettingsBtn) {
+            sidebarSettingsBtn.onclick = function () {
+              sidebarMenuPopup.style.display = 'none';
+              window.location.href = 'settings.html';
+            };
+          }
+          var sidebarLogoutBtn = document.getElementById('sidebarLogoutBtn');
+          if (sidebarLogoutBtn) {
+            sidebarLogoutBtn.addEventListener('click', function () {
+              sidebarMenuPopup.style.display = 'none';
+              if (window.firebase && firebase.auth) {
+                firebase
+                  .auth()
+                  .signOut()
+                  .then(function () {
+                    window.location.href = 'landing.html';
+                  });
+              } else {
+                window.location.href = 'landing.html';
+              }
+            });
+          }
+        }
+      })();
+    </script>
   </body>
 </html>
