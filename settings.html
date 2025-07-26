@@ -523,11 +523,15 @@
                   for="settingsProfilePhotoInput"
                   class="settings-btn"
                   style="
-                    padding: 4px 10px;
+                    padding: 0;
                     font-size: 0.92rem;
                     border-radius: 50%;
-                    width: 28px;
-                    height: 28px;
+                    width: 22px;
+                    height: 22px;
+                    min-width: 22px;
+                    min-height: 22px;
+                    max-width: 22px;
+                    max-height: 22px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -537,7 +541,8 @@
                   "
                 >
                   <svg
-                    width="16"
+                    width="12"
+                    height="12"
                     height="16"
                     viewBox="0 0 24 24"
                     fill="none"
@@ -558,6 +563,7 @@
               </div>
             </div>
           </div>
+          <div style="height: 32px"></div>
           <label class="settings-label" for="settingsName">Name</label>
           <input
             class="settings-input"
@@ -586,6 +592,13 @@
             type="text"
             placeholder="Location"
           />
+          <button
+            class="settings-btn"
+            id="saveProfileBtn"
+            style="margin-bottom: 24px; margin-top: 2px"
+          >
+            Save
+          </button>
         </div>
         <div class="settings-section">
           <div class="settings-section-title">Account</div>
