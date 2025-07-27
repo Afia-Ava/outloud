@@ -584,9 +584,7 @@
       }
     </style>
     <script>
-      // --- Progress Stats Boxes Logic ---
       function updateProgressStats() {
-        // Articles Written: count of user's newsletters
         let written = 0;
         try {
           const newsletters = JSON.parse(localStorage.getItem('newsletters') || '[]');
@@ -594,7 +592,6 @@
         } catch {}
         document.getElementById('statArticlesWritten').textContent = written;
 
-        // Articles Read: count of user's read articles (assume localStorage 'articlesRead' is an array of IDs)
         let read = 0;
         try {
           const articlesRead = JSON.parse(localStorage.getItem('articlesRead') || '[]');
@@ -602,7 +599,6 @@
         } catch {}
         document.getElementById('statArticlesRead').textContent = read;
 
-        // Activity Streak: use streak from streakText if available, else 0
         let streak = 0;
         const streakText = document.getElementById('streakText');
         if (streakText && streakText.textContent) {
@@ -612,7 +608,6 @@
         document.getElementById('statActivityStreak').textContent = streak;
       }
       document.addEventListener('DOMContentLoaded', updateProgressStats);
-      // Also update after tasks are added
       setTimeout(() => {
         if (typeof renderTasks === 'function') {
           const orig = renderTasks;
@@ -678,7 +673,6 @@
             <b>Weekly Summary</b>
             <div id="weeklyText">No summary yet.</div>
           </div>
-          <!-- Calendar box removed -->
         </div>
       </div>
     </main>

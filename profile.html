@@ -876,7 +876,6 @@
             postDiv.style.marginBottom = '18px';
             postDiv.style.cursor = 'pointer';
             postDiv.addEventListener('click', function(e) {
-              // Prevent click if clicking on a button (heart/save)
               if (e.target.closest('button')) return;
               window.open('article.html?id=' + idx, '_blank');
             });
@@ -915,7 +914,6 @@
             contentWrapper.appendChild(textDiv);
             postDiv.appendChild(contentWrapper);
             userPostsDiv.appendChild(postDiv);
-            // Toggle logic for heart and save
             heartBtn.addEventListener('click', function(ev) {
               ev.stopPropagation();
               var svg = heartBtn.querySelector('svg path');

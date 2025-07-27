@@ -405,21 +405,47 @@
       </div>
     </main>
     <script>
-      // Load article data from localStorage (by index)
       function getQueryParam(name) {
         const url = new URL(window.location.href);
         return url.searchParams.get(name);
       }
       const articleIdx = parseInt(getQueryParam('id'), 10);
-      const posts = JSON.parse(localStorage.getItem('newsletters') || '[]');
-      if (!isNaN(articleIdx) && posts[posts.length - 1 - articleIdx]) {
-        const post = posts[posts.length - 1 - articleIdx];
+      const exploreArticles = [
+        {
+          image:
+            'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80',
+          caption:
+            'You don’t truly understand something until you write it down',
+          content:
+            'Why Writing Brings Clarity to Life\n\nWriting is a process of discovery. When you put your thoughts into words, you clarify your understanding and reveal gaps in your knowledge. The act of writing forces you to slow down and think deeply, making your ideas more concrete and organized.\n\nWhether you’re journaling, blogging, or explaining a concept to someone else, writing helps you internalize information and see it from new perspectives. Try writing about something you’re learning—you’ll be surprised how much more you understand.',
+        },
+        {
+          image:
+            'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80',
+          caption: 'Article 2 Title',
+          content:
+            'Article 2 Subtitle or First Line\n\nThis is the content for Article 2. You can replace this with any text you want to display for the second article.\n\nAdd more details, stories, or insights here as needed.',
+        },
+        {
+          image:
+            'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
+          caption: 'Article 3 Title',
+          content:
+            'Article 3 Subtitle or First Line\n\nThis is the content for Article 3. You can replace this with any text you want to display for the third article.\n\nShare your thoughts, experiences, or advice here.',
+        },
+      ];
+      if (
+        !isNaN(articleIdx) &&
+        articleIdx >= 0 &&
+        articleIdx < exploreArticles.length
+      ) {
+        const post = exploreArticles[articleIdx];
         if (post.image) {
           document.getElementById('articleImage').src = post.image;
           document.getElementById('articleImage').style.display = 'block';
         }
         document.getElementById('articleCaption').textContent = post.caption;
-        document.getElementById('articleContent').innerHTML = post.content;
+        document.getElementById('articleContent').textContent = post.content;
       } else {
         document.getElementById('articleCaption').textContent =
           'Article not found.';

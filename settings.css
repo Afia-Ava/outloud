@@ -163,8 +163,7 @@ body {
 .settings-profile-photo-upload label.settings-btn:hover {
   background: #017575;
 }
-/* Removed old .settings-photo-row img rule, handled above */
-/* Removed old .settings-photo-upload rule, handled above */
+
 .settings-btn {
   background: #014848;
   color: #fff;

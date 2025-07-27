@@ -185,7 +185,6 @@
         </div>
       </div>
       <script>
-        // Sidebar avatar and menu logic (runs last, after all other scripts)
         document.addEventListener('DOMContentLoaded', function () {
           var sidebarProfilePic = document.getElementById('sidebarProfilePic');
           var sidebarDefaultAvatar = document.getElementById(
@@ -196,7 +195,6 @@
           function setSidebarName(name) {
             sidebarProfileName.textContent = name || 'User';
           }
-          // Only set avatar once, and keep it if present
           var savedPic = localStorage.getItem('profilePic');
           if (savedPic && savedPic !== 'null' && savedPic !== 'undefined') {
             sidebarProfilePic.src = savedPic;
@@ -208,7 +206,6 @@
           }
           var localName = localStorage.getItem('userName') || 'User';
           setSidebarName(localName);
-          // Menu logic
           var sidebarMenuBtn = document.getElementById('sidebarMenuBtn');
           var sidebarMenuPopup = document.getElementById('sidebarMenuPopup');
           if (sidebarMenuBtn && sidebarMenuPopup) {
@@ -367,22 +364,22 @@
           Get Started
         </button>
         <div class="info-cards-row">
-          <div class="info-card">
+          <a class="info-card" href="explore.html" style="text-decoration: none; color: inherit;">
             <div class="info-card-title">Explore</div>
             <div class="info-card-desc">Discover what others are learning</div>
-          </div>
-          <div class="info-card">
+          </a>
+          <a class="info-card" href="progress.html" style="text-decoration: none; color: inherit;">
             <div class="info-card-title">Progress</div>
             <div class="info-card-desc">
               Track your writing and reflection journey
             </div>
-          </div>
-          <div class="info-card">
+          </a>
+          <a class="info-card" href="profile.html" style="text-decoration: none; color: inherit;">
             <div class="info-card-title">Profile</div>
             <div class="info-card-desc">
               Your personal writing and reflection space
             </div>
-          </div>
+          </a>
         </div>
         <style>
           .info-cards-row {

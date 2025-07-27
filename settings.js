@@ -55,7 +55,6 @@ function loadSettingsProfile() {
   });
 }
 document.addEventListener('DOMContentLoaded', function () {
-  // Wait for Firebase Auth to resolve before loading profile (for email)
   if (window.firebase && firebase.auth) {
     firebase.auth().onAuthStateChanged(function (user) {
       loadSettingsProfile();
