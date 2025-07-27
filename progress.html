@@ -428,29 +428,67 @@
       <div class="progress-header">
         <span class="progress-title">Progress</span>
       </div>
+      <div class="progress-stats-row">
+        <div class="progress-stat-box">
+          <div class="progress-stat-label">Articles Written</div>
+          <div class="progress-stat-value" id="statArticlesWritten">0</div>
+        </div>
+        <div class="progress-stat-box">
+          <div class="progress-stat-label">Articles Read</div>
+          <div class="progress-stat-value" id="statArticlesRead">0</div>
+        </div>
+        <div class="progress-stat-box">
+          <div class="progress-stat-label">Activity Streak</div>
+          <div class="progress-stat-value" id="statActivityStreak">0</div>
+        </div>
+      </div>
+      <div class="progress-coming-soon-note">More progress features coming soon.</div>
       <div style="display: flex; gap: 40px; align-items: flex-start">
         <div style="flex: 2; min-width: 0">
-          <form class="add-task-form" id="addTaskForm">
-            <input
-              type="text"
-              class="add-task-input"
-              id="taskInput"
-              placeholder="What did you accomplish today?"
-              required
-            />
-            <button
-              type="submit"
-              class="add-task-btn"
-              style="display: flex; align-items: center; gap: 8px"
-            >
-              <svg
-                width="18"
-                height="18"
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <style>
+      .progress-coming-soon-note {
+        color: #b0b3b8;
+        font-size: 1.08rem;
+        font-family: 'Inter', Arial, sans-serif;
+        margin-bottom: 32px;
+        margin-top: -18px;
+        margin-left: 4px;
+        letter-spacing: 0.2px;
+      }
+      .progress-stats-row {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 32px;
+        margin-top: 8px;
+      }
+      .progress-stat-box {
+        background: #23272f;
+        border-radius: 12px;
+        padding: 22px 32px 18px 32px;
+        min-width: 160px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 2px 12px 0 rgba(1,44,44,0.08);
+      }
+      .progress-stat-label {
+        color: #b2fefa;
+        font-size: 1.08rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+        font-family: 'Satoshi', Arial, sans-serif;
+      }
+      .progress-stat-value {
+        color: #fff;
+        font-size: 2.1rem;
+        font-weight: 700;
+        font-family: 'Satoshi', Arial, sans-serif;
+      }
       body {
         background: #18191a;
         color: #f5f6fa;
@@ -546,6 +584,41 @@
       }
     </style>
     <script>
+      // --- Progress Stats Boxes Logic ---
+      function updateProgressStats() {
+        // Articles Written: count of user's newsletters
+        let written = 0;
+        try {
+          const newsletters = JSON.parse(localStorage.getItem('newsletters') || '[]');
+          written = newsletters.length;
+        } catch {}
+        document.getElementById('statArticlesWritten').textContent = written;
+
+        // Articles Read: count of user's read articles (assume localStorage 'articlesRead' is an array of IDs)
+        let read = 0;
+        try {
+          const articlesRead = JSON.parse(localStorage.getItem('articlesRead') || '[]');
+          read = Array.isArray(articlesRead) ? articlesRead.length : 0;
+        } catch {}
+        document.getElementById('statArticlesRead').textContent = read;
+
+        // Activity Streak: use streak from streakText if available, else 0
+        let streak = 0;
+        const streakText = document.getElementById('streakText');
+        if (streakText && streakText.textContent) {
+          const match = streakText.textContent.match(/(\d+)/);
+          if (match) streak = parseInt(match[1], 10);
+        }
+        document.getElementById('statActivityStreak').textContent = streak;
+      }
+      document.addEventListener('DOMContentLoaded', updateProgressStats);
+      // Also update after tasks are added
+      setTimeout(() => {
+        if (typeof renderTasks === 'function') {
+          const orig = renderTasks;
+          window.renderTasks = function() { orig.apply(this, arguments); updateProgressStats(); };
+        }
+      }, 100);
       (function () {
         var sidebarProfilePic = document.getElementById('sidebarProfilePic');
         var sidebarDefaultAvatar = document.getElementById('sidebarDefaultAvatar');
@@ -566,7 +639,7 @@
         setSidebarName(localName);
       })();
     </script>
-            />
+
           </div>
           <div id="taskGroups"></div>
         </div>
@@ -605,29 +678,7 @@
             <b>Weekly Summary</b>
             <div id="weeklyText">No summary yet.</div>
           </div>
-          <div
-            style="background: #23272f; border-radius: 14px; padding: 18px 18px"
-          >
-            <div
-              style="font-size: 1.1rem; font-weight: 600; margin-bottom: 10px"
-            >
-              Calendar
-            </div>
-            <input
-              type="date"
-              id="calendarDate"
-              style="
-                width: 100%;
-                padding: 8px;
-                border-radius: 8px;
-                border: none;
-                background: #18191a;
-                color: #fff;
-                margin-bottom: 14px;
-              "
-            />
-            <div id="calendarTasks"></div>
-          </div>
+          <!-- Calendar box removed -->
         </div>
       </div>
     </main>

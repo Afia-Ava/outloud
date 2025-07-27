@@ -870,10 +870,16 @@
               '<div class="user-post-empty" style="text-align:center;color:#b5b5c2;font-size:1.1rem;padding:32px 0;">You don\'t have any newsletters yet.</div>';
             return;
           }
-          posts.slice().reverse().forEach(function (post) {
+          posts.slice().reverse().forEach(function (post, idx) {
             var postDiv = document.createElement('div');
             postDiv.className = 'user-post';
             postDiv.style.marginBottom = '18px';
+            postDiv.style.cursor = 'pointer';
+            postDiv.addEventListener('click', function(e) {
+              // Prevent click if clicking on a button (heart/save)
+              if (e.target.closest('button')) return;
+              window.open('article.html?id=' + idx, '_blank');
+            });
             if (post.image) {
               var img = document.createElement('img');
               img.src = post.image;
@@ -887,16 +893,11 @@
             var heartBtn = document.createElement('button');
             heartBtn.type = 'button';
             heartBtn.style = 'background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;';
-            // Classic, symmetrical heart SVG
-            // SVG path matches https://www.iconpacks.net/icons/2/free-heart-icon-3510-thumb.png
             heartBtn.innerHTML = `<svg class="heart-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
-            // Pin icon (minimal, white outline, diagonal)
             var saveBtn = document.createElement('button');
             saveBtn.type = 'button';
             saveBtn.style = 'background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;';
-            // Minimal bookmark (saved) icon
-// SVG with rounded corners for a softer bookmark icon
-saveBtn.innerHTML = `<svg class="save-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3h9A1.5 1.5 0 0 1 18 4.5v15.2a1 1 0 0 1-1.5.87L12 18.1l-4.5 2.47A1 1 0 0 1 6 19.7V4.5A1.5 1.5 0 0 1 7.5 3z"/></svg>`;
+            saveBtn.innerHTML = `<svg class="save-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3h9A1.5 1.5 0 0 1 18 4.5v15.2a1 1 0 0 1-1.5.87L12 18.1l-4.5 2.47A1 1 0 0 1 6 19.7V4.5A1.5 1.5 0 0 1 7.5 3z"/></svg>`;
             iconRow.appendChild(heartBtn);
             iconRow.appendChild(saveBtn);
             postDiv.appendChild(iconRow);
@@ -915,7 +916,8 @@ saveBtn.innerHTML = `<svg class="save-icon" width="20" height="20" viewBox="0 0 
             postDiv.appendChild(contentWrapper);
             userPostsDiv.appendChild(postDiv);
             // Toggle logic for heart and save
-            heartBtn.addEventListener('click', function() {
+            heartBtn.addEventListener('click', function(ev) {
+              ev.stopPropagation();
               var svg = heartBtn.querySelector('svg path');
               if (svg.getAttribute('fill') === '#fff') {
                 svg.setAttribute('fill', 'none');
@@ -923,7 +925,8 @@ saveBtn.innerHTML = `<svg class="save-icon" width="20" height="20" viewBox="0 0 
                 svg.setAttribute('fill', '#fff');
               }
             });
-            saveBtn.addEventListener('click', function() {
+            saveBtn.addEventListener('click', function(ev) {
+              ev.stopPropagation();
               var svg = saveBtn.querySelector('svg path');
               if (svg.getAttribute('fill') === '#fff') {
                 svg.setAttribute('fill', 'none');
