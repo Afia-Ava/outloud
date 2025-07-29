@@ -409,6 +409,7 @@
         const url = new URL(window.location.href);
         return url.searchParams.get(name);
       }
+      const articleType = getQueryParam('type');
       const articleIdx = parseInt(getQueryParam('id'), 10);
       const exploreArticles = [
         {
@@ -422,19 +423,39 @@
         {
           image:
             'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80',
-          caption: 'Article 2 Title',
-          content:
-            'Article 2 Subtitle or First Line\n\nThis is the content for Article 2. You can replace this with any text you want to display for the second article.\n\nAdd more details, stories, or insights here as needed.',
+          caption: "Why You Should Share What You're Learning",
+          content: `Most people wait until they’ve mastered something to speak up. They want the certificate, the job title, the perfect take.\n\nBut what if the most valuable time to share is while you're still figuring it out?\n\nYou Don’t Need to Be an Expert to Be Worth Listening To\nThe internet has made us all broadcasters. But that doesn’t mean you need to pose as a guru. In fact, people connect more with honest, in-progress learning than polished, distant authority.\n\nIf you’re reading, exploring, struggling, questioning—you’re already building knowledge. And when you write about what you’re learning, two things happen:\n\nYou understand it more deeply.\n\nSomeone else feels less alone in their learning too.\n\nTeaching What You’re Learning is a Superpower\nWhen you explain a concept as you're grasping it, you naturally speak in the language of someone just a few steps behind you. That makes your voice more relatable, and your insights more accessible than someone miles ahead.\n\nYou also get to document your growth in real time. You’re building your own trail of breadcrumbs. Six months from now, you’ll look back and say: Whoa, I actually came a long way.\n\nShare to Remember. Share to Connect.\nThe act of writing forces your brain to commit. You’re not just consuming anymore—you’re creating. It’s the difference between watching a cooking show and making the recipe yourself.\n\nPlus, when you share it, you attract curious people like you. People who want to learn, build, grow. The more you put out into the world, the more chances you create to find your people.\n\nYou don’t have to know everything. You just have to start.\n\nWrite the rough ideas. Post the unfinished thoughts. Say what you’re learning right now, and let others grow with you.\n\nBecause the truth is: there’s no better time to share than before you feel ready.`,
         },
         {
           image:
             'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
-          caption: 'Article 3 Title',
-          content:
-            'Article 3 Subtitle or First Line\n\nThis is the content for Article 3. You can replace this with any text you want to display for the third article.\n\nShare your thoughts, experiences, or advice here.',
+          caption: 'You Don’t Need More Advice — You Need Reflection',
+          content: `We spend a lot of time searching for answers.\n\nPodcasts, YouTube videos, newsletters, mentors — someone out there must have the roadmap. And sometimes they do. But more often, we don’t need more input.\n\nWe need a moment to pause.\nAnd reflect.\n\nThe Fastest Way to Get Unstuck? Write.\nNot a tweet. Not a polished blog post.\nJust… write. In your own words.\nAbout what you’re feeling, thinking, questioning.\n\nThe truth is: most of the answers you're chasing are already inside your head — they’re just unorganized. Writing is how you sort the mess. It’s how fuzzy ideas become real insights.\n\nYou can’t outsource that clarity.\nBut you can create space for it.\n\nReflection Isn’t a Luxury. It’s a Compass.\nWhen life gets chaotic, we tend to push through. Stay busy. Distract ourselves. But reflection is not a delay — it's a shortcut.\n\nIt keeps you aligned with what matters.\nIt helps you spot patterns in your decisions.\nIt builds self-awareness, quietly and powerfully.\n\nEven five minutes a week makes a difference.\nYou show up differently when you know where you're going — and why.\n\nDon’t Wait for a Crisis to Reflect\nPeople usually reflect when something goes wrong — a failure, a burnout, a hard decision. But reflection doesn’t need a dramatic reason. It’s most powerful when it’s a quiet, consistent habit.\n\nWrite about the small wins.\nThe tiny doubts.\nThe unexpected joy.\n\nLet reflection become your practice.\nNot for perfection.\nBut for direction.\n\nYou already have more insight than you think.\nYou just haven’t written it down yet.`,
         },
       ];
-      if (
+      if (articleType === 'user') {
+        var newsletters = JSON.parse(
+          localStorage.getItem('newsletters') || '[]'
+        );
+        var reversed = newsletters.slice().reverse();
+        if (
+          !isNaN(articleIdx) &&
+          articleIdx >= 0 &&
+          articleIdx < reversed.length
+        ) {
+          var post = reversed[articleIdx];
+          if (post.image) {
+            document.getElementById('articleImage').src = post.image;
+            document.getElementById('articleImage').style.display = 'block';
+          }
+          document.getElementById('articleCaption').textContent = post.caption;
+          document.getElementById('articleContent').innerHTML = post.content;
+        } else {
+          document.getElementById('articleCaption').textContent =
+            'Article not found.';
+          document.getElementById('articleContent').textContent = '';
+        }
+      } else if (
         !isNaN(articleIdx) &&
         articleIdx >= 0 &&
         articleIdx < exploreArticles.length

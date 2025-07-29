@@ -877,7 +877,8 @@
             postDiv.style.cursor = 'pointer';
             postDiv.addEventListener('click', function(e) {
               if (e.target.closest('button')) return;
-              window.open('article.html?id=' + idx, '_blank');
+              // Pass type=user so article.html knows to load from newsletters
+              window.open('article.html?type=user&id=' + idx, '_blank');
             });
             if (post.image) {
               var img = document.createElement('img');

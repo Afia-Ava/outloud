@@ -713,14 +713,15 @@
                 font-size: 1.05rem;
                 font-weight: 600;
                 margin: 14px 18px 2px 16px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                /* Show full text, no ellipsis, allow wrapping */
+                white-space: normal;
+                overflow: visible;
+                text-overflow: unset;
                 max-width: calc(100% - 18px);
                 box-sizing: border-box;
               "
             >
-              Article 2 Title
+              Why You Should Share What You're Learning
             </div>
             <div
               class="user-post-firstline"
@@ -736,7 +737,7 @@
                 box-sizing: border-box;
               "
             >
-              Article 2 Subtitle or First Line
+              Most people wait until they’ve mastered something to speak up.
             </div>
           </div>
           <div
@@ -850,7 +851,7 @@
                 box-sizing: border-box;
               "
             >
-              Article 3 Title
+              You Don’t Need More Advice
             </div>
             <div
               class="user-post-firstline"
@@ -866,7 +867,7 @@
                 box-sizing: border-box;
               "
             >
-              Article 3 Subtitle or First Line
+              We spend a lot of time searching for answers.
             </div>
           </div>
         </div>
